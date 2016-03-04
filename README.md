@@ -2,21 +2,28 @@
 
 Time spent: **X** hours spent in total
 
+## App Description:
+
+This app allows a user to input a certain location where they need to go, and an alarm will alert 
+them when they are getting close to their desired location. This app is specifically designed for 
+those who sleep or fall asleep on public transportation, such as busses or trains. 
+
 ## User Stories
+
+
 
 The following **required** functionality is completed:
 
-- [ ] 
-- [ ] 
-- [ ] 
-- [ ] 
+- [ ] Tracks user's current location 
+- [ ] Alerts user (via alarm or vibrate) when they are approaching desination
+- [ ] Allow user to set ending destination 
 - [ ] 
 - [ ] 
 
 The following **optional** features are implemented:
 
-- [ ] 
-- [ ] 
+- [ ] Change the time that the alarm alerts the user 
+- [ ] Allow user to set start location
 
 
 The following **additional** features are implemented:
