@@ -1,8 +1,10 @@
-# Final Project - Are We There Yet?
+# Final Project - BuzMe
 
 Time spent: **X** hours spent in total
 
 ## App Description:
+BuzMe uses the [Google Places API & GoogleMaps SDK](https://developers.google.com/maps/ios/)
+Model Classes: GMSAddress, AutoComplete fetcher, Distance Matrix, Map View, GMSServices, GMSUISettings 
 
 This app allows a user to input a certain location where they need to go, and an alarm will alert 
 them when they are getting close to their desired location. This app is specifically designed for 
@@ -17,8 +19,7 @@ The following **required** functionality is completed:
 - [ ] Tracks user's current location 
 - [ ] Alerts user (via alarm or vibrate) when they are approaching desination
 - [ ] Allow user to set ending destination 
-- [ ] 
-- [ ] 
+- [ ] Add in Google Maps SDK 
 
 The following **optional** features are implemented:
 
