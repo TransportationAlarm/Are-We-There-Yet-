@@ -5,7 +5,7 @@ Time spent: **X** hours spent in total
 ## App Description:
 BuzMe uses the [Google Places API & GoogleMaps SDK](https://developers.google.com/maps/ios/)
 
-Model Classes: PreviousTrips (For Previous History Screen, as well as destinations drop down on home screen), TimePicker (To populate alert time Picker on settings page), User (To store previous destinations), Alarm (Store data about alarm)
+Model Classes: PreviousTrips (For Previous History Screen, as well as destinations drop down on home screen), TimePicker (To populate alert time Picker on settings page), User (To store previous destinations)
 
 Parse: 
 
