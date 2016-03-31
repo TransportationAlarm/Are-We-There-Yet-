@@ -7,9 +7,13 @@
 //
 
 import UIKit
+import Parse
 
 class LoginViewController: UIViewController {
 
+    @IBOutlet weak var passwordField: UITextField!
+    @IBOutlet weak var emailField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -22,29 +26,52 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func onSignIn(sender: AnyObject) {
-        PFUser.logInWithUsernameInBackground(usernameField.text!, password: passwordField.text!) { (user: PFUser?, error: NSError?) -> Void in
+        PFUser.logInWithUsernameInBackground(emailField.text!, password: passwordField.text!) { (user: PFUser?, error: NSError?) -> Void in
             if user != nil {
-                print("you're logged in!")
+                print("You are logged in")
                 self.performSegueWithIdentifier("loginSegue", sender: nil)
+            } else {
+                print("failed to log in")
+                if (error?.code == 200) {
+                    let alert = UIAlertController(title: "Username Missing", message: "Please input username", preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                    self.presentViewController(alert, animated: true, completion: nil)
+                    
+                } else if (error?.code == 201) {
+                    let alert = UIAlertController(title: "Password Missing", message: "Please input password", preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                    self.presentViewController(alert, animated: true, completion: nil)
+                }
             }
+            
         }
     }
     
     @IBAction func onSignUp(sender: AnyObject) {
         let newUser = PFUser()
         
-        newUser.username = usernameField.text
+        newUser.username = emailField.text
         newUser.password = passwordField.text
-        
-        newUser.signUpInBackgroundWithBlock { (
-            success: Bool, error: NSError?) -> Void in
+        newUser.signUpInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
             if success {
-                print("Yay, created a user!")
+                print("Created a user")
                 self.performSegueWithIdentifier("loginSegue", sender: nil)
-            } else {
+            } else { // handles possible failures
                 print(error?.localizedDescription)
-                if error?.code == 202 {
-                    print("User name is taken")
+                if (error?.code == 202) {
+                    print("Username is already taken")
+                    let alert = UIAlertController(title: "Username Taken", message: "Try a different name!", preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                    self.presentViewController(alert, animated: true, completion: nil)
+                } else if (error?.code == 200) {
+                    let alert = UIAlertController(title: "Username Missing", message: "Please input username", preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                    self.presentViewController(alert, animated: true, completion: nil)
+                    
+                } else if (error?.code == 201) {
+                    let alert = UIAlertController(title: "Password Missing", message: "Please input password", preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                    self.presentViewController(alert, animated: true, completion: nil)
                 }
             }
         }
