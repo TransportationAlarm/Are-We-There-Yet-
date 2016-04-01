@@ -15,6 +15,9 @@
 		087CF3521CAB665200A6319D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 087CF3501CAB665200A6319D /* Main.storyboard */; };
 		087CF3541CAB665200A6319D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 087CF3531CAB665200A6319D /* Assets.xcassets */; };
 		087CF3571CAB665200A6319D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 087CF3551CAB665200A6319D /* LaunchScreen.storyboard */; };
+		08AC56901CAE16C600B5C8F5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AC568F1CAE16C600B5C8F5 /* User.swift */; };
+		08AC56941CAE173400B5C8F5 /* AlarmTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AC56931CAE173400B5C8F5 /* AlarmTableViewCell.swift */; };
+		08AC56961CAE174600B5C8F5 /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AC56951CAE174600B5C8F5 /* HistoryTableViewCell.swift */; };
 		21080BA371734F0FA9121C40 /* Pods_BuzMe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B2BCDFAF19EF28B7FC45A41 /* Pods_BuzMe.framework */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +32,9 @@
 		087CF3531CAB665200A6319D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		087CF3561CAB665200A6319D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		087CF3581CAB665200A6319D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		08AC568F1CAE16C600B5C8F5 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		08AC56931CAE173400B5C8F5 /* AlarmTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlarmTableViewCell.swift; sourceTree = "<group>"; };
+		08AC56951CAE174600B5C8F5 /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
 		1B2BCDFAF19EF28B7FC45A41 /* Pods_BuzMe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BuzMe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD761A3A1B486CC6A2DFC6E5 /* Pods-BuzMe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BuzMe.release.xcconfig"; path = "Pods/Target Support Files/Pods-BuzMe/Pods-BuzMe.release.xcconfig"; sourceTree = "<group>"; };
 		D0585915CCE963BFCBDBD60D /* Pods-BuzMe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BuzMe.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BuzMe/Pods-BuzMe.debug.xcconfig"; sourceTree = "<group>"; };
@@ -78,6 +84,8 @@
 		087CF34B1CAB665200A6319D /* BuzMe */ = {
 			isa = PBXGroup;
 			children = (
+				08AC56971CAE174B00B5C8F5 /* Views */,
+				08AC568E1CAE15ED00B5C8F5 /* Models */,
 				080B243B1CACE5FD00EE658A /* View Controllers */,
 				087CF34C1CAB665200A6319D /* AppDelegate.swift */,
 				087CF3501CAB665200A6319D /* Main.storyboard */,
@@ -86,6 +94,23 @@
 				087CF3581CAB665200A6319D /* Info.plist */,
 			);
 			path = BuzMe;
+			sourceTree = "<group>";
+		};
+		08AC568E1CAE15ED00B5C8F5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				08AC568F1CAE16C600B5C8F5 /* User.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		08AC56971CAE174B00B5C8F5 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				08AC56931CAE173400B5C8F5 /* AlarmTableViewCell.swift */,
+				08AC56951CAE174600B5C8F5 /* HistoryTableViewCell.swift */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 		6768DD6329A6769E690E01C3 /* Pods */ = {
@@ -230,8 +255,11 @@
 			files = (
 				080B243D1CACE62400EE658A /* LoginViewController.swift in Sources */,
 				080B243F1CACE63200EE658A /* MapViewController.swift in Sources */,
+				08AC56961CAE174600B5C8F5 /* HistoryTableViewCell.swift in Sources */,
+				08AC56901CAE16C600B5C8F5 /* User.swift in Sources */,
 				087CF34D1CAB665200A6319D /* AppDelegate.swift in Sources */,
 				080B24431CACE64600EE658A /* HistoryViewController.swift in Sources */,
+				08AC56941CAE173400B5C8F5 /* AlarmTableViewCell.swift in Sources */,
 				080B24411CACE63D00EE658A /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

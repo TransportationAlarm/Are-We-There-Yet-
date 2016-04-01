@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import AudioToolbox
 
-class SettingsViewController: UIViewController {
+class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +22,22 @@ class SettingsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 0
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        return cell
+    }
+    
+    @IBAction func onVibrateRing(sender: AnyObject) {
+        AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
+    }
 
+    @IBAction func onVibrateSilent(sender: AnyObject) {
+    }
+    
     /*
     // MARK: - Navigation
 
