@@ -77,6 +77,9 @@ class LoginViewController: UIViewController {
         }
     }
     
+    @IBAction func logoutToLoginScreen(segue:UIStoryboardSegue) {
+    }
+    
 
     /*
     // MARK: - Navigation

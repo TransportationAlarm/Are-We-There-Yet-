@@ -24,6 +24,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 configuration.server = "http://buzme.herokuapp.com/parse"
             })
         )
+        
+        if PFUser.currentUser() != nil {
+            // if there is a logged in user then load the home view controller
+            print("current user detected: \(PFUser.currentUser())")
+            let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("NavigationController")
+            window?.rootViewController = viewController
+        }
+        
+        
         return true
     }
 

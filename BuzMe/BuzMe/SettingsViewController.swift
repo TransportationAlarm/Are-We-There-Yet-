@@ -10,11 +10,18 @@ import UIKit
 import AudioToolbox
 
 class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    @IBOutlet weak var tableView: UITableView!
+    let soundsMap: [String: SystemSoundID]? = ["Choo Choo": 1023, "Descent": 1024, "Minuet": 1027, "News Flash": 1028, "Sherwood Forest": 1030]
+    //var soundNames: [String] = ["Choo Choo", "Descent", "Minuet", "News Flash", "Sherwood Forest"]
+
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -23,12 +30,48 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return (self.soundsMap?.keys.count)!
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = self.tableView.dequeueReusableCellWithIdentifier("AlarmCell") as! AlarmTableViewCell
+
+        let soundName = Array(soundsMap!.keys)
+        cell.textLabel?.text = soundName[indexPath.row]
+
         
+//        //configure you cell here.
+//        if !checked[indexPath.row] {
+//            cell.accessoryType = .None
+//        } else if checked[indexPath.row] {
+//            cell.accessoryType = .Checkmark
+//        }
         return cell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if (indexPath.row == 0) {
+            let soundName = Array(soundsMap!.keys)[4]
+            let soundId = soundsMap![soundName]
+            AudioServicesPlaySystemSound(soundId!)
+        } else if (indexPath.row == 1) {
+            let soundName = Array(soundsMap!.keys)[3]
+            let soundId = soundsMap![soundName]
+            AudioServicesPlayAlertSound(soundId!)
+        } else if (indexPath.row == 2) {
+            let soundName = Array(soundsMap!.keys)[2]
+            let soundId = soundsMap![soundName]
+            AudioServicesPlayAlertSound(soundId!)
+        } else if (indexPath.row == 3) {
+            let soundName = Array(soundsMap!.keys)[1]
+            let soundId = soundsMap![soundName]
+            AudioServicesPlayAlertSound(soundId!)
+        } else {
+            let soundName = Array(soundsMap!.keys)[0]
+            let soundId = soundsMap![soundName]
+            AudioServicesPlayAlertSound(soundId!)
+        }
+    
     }
     
     @IBAction func onVibrateRing(sender: AnyObject) {
@@ -38,6 +81,10 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     @IBAction func onVibrateSilent(sender: AnyObject) {
     }
     
+    @IBAction func onClearHistoryPressed(sender: AnyObject) {
+        
+        // history page needs to be set up first
+    }
     /*
     // MARK: - Navigation
 
