@@ -8,6 +8,7 @@
 
 import UIKit
 import AudioToolbox
+import AVFoundation
 
 class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -15,11 +16,13 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     
     @IBOutlet weak var vibrateOnSilentSwitch: UISwitch!
     
+    @IBOutlet weak var volumeSlider: UISlider!
+    
     @IBOutlet weak var tableView: UITableView!
     let soundsMap: [String: SystemSoundID]? = ["Choo Choo": 1023, "Descent": 1024, "Minuet": 1027, "News Flash": 1028, "Sherwood Forest": 1030]
+    
+    var reproductor = AVAudioPlayer()
    
-
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -98,6 +101,12 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
         }
     }
+    
+    @IBAction func sliderValueChanged(sender: UISlider) {
+        let selectedValue = Float(sender.value)
+        reproductor.volume = selectedValue
+    }
+    
     
     @IBAction func onClearHistoryPressed(sender: AnyObject) {
         
