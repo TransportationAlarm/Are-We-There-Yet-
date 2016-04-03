@@ -12,13 +12,10 @@ import AudioToolbox
 class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var vibrateOnRingSwitch: UISwitch!
-    
     @IBOutlet weak var vibrateOnSilentSwitch: UISwitch!
-    
     @IBOutlet weak var tableView: UITableView!
+    
     let soundsMap: [String: SystemSoundID]? = ["Choo Choo": 1023, "Descent": 1024, "Minuet": 1027, "News Flash": 1028, "Sherwood Forest": 1030]
-   
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
