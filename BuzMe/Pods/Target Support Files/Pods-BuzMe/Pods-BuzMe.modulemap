@@ -1,0 +1,6 @@
+framework module Pods_BuzMe {
+  umbrella header "Pods-BuzMe-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -15,9 +15,9 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var vibrateOnRingSwitch: UISwitch!
     @IBOutlet weak var vibrateOnSilentSwitch: UISwitch!
     
-    @IBOutlet weak var volumeSlider: UISlider!
-    
     @IBOutlet weak var tableView: UITableView!
+    
+    var audioPlayer: AVAudioPlayer!
     
     let soundsMap: [String: SystemSoundID]? = ["Choo Choo": 1023, "Descent": 1024, "Minuet": 1027, "News Flash": 1028, "Sherwood Forest": 1030]
     var checked = [Bool](count: 5, repeatedValue: false)
@@ -44,7 +44,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         let soundName = Array(soundsMap!.keys)
         cell.textLabel?.text = soundName[indexPath.row]
         
-        //configure you cell here.
         if !checked[indexPath.row] {
             cell.accessoryType = .None
         } else if checked[indexPath.row] {
@@ -89,9 +88,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         }
     
     }
-    
 
-    
     @IBAction func onVibrateRing(sender: AnyObject) {
         if (vibrateOnRingSwitch.on) {
             AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
@@ -103,12 +100,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
         }
     }
-    
-    @IBAction func sliderValueChanged(sender: UISlider) {
-        let selectedValue = Float(sender.value)
-        reproductor.volume = selectedValue
-    }
-    
     
     @IBAction func onClearHistoryPressed(sender: AnyObject) {
         
