@@ -24,10 +24,10 @@ those who sleep or fall asleep on public transportation, such as busses or train
 
 
 The following **required** functionality is completed:
-
+- [x] Allow user to sign up/log in to store account info
 - [ ] Alerts user (via alarm or vibrate) when they are approaching desination
 - [ ] Add in Google Maps SDK and Tracks user's current location and end destination
-- [ ] Implement Settings Page
+- [x] Implement Settings Page
 - [ ] Keep track of history of users trips
 
 The following **optional** features are implemented:
