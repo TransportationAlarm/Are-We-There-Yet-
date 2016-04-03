@@ -16,6 +16,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var tableView: UITableView!
     
     let soundsMap: [String: SystemSoundID]? = ["Choo Choo": 1023, "Descent": 1024, "Minuet": 1027, "News Flash": 1028, "Sherwood Forest": 1030]
+    var checked = [Bool](count: 5, repeatedValue: false)
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,23 +37,29 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCellWithIdentifier("AlarmCell") as! AlarmTableViewCell
-
         let soundName = Array(soundsMap!.keys)
         cell.textLabel?.text = soundName[indexPath.row]
-
         
-//        //configure you cell here.
-//        if !checked[indexPath.row] {
-//            cell.accessoryType = .None
-//        } else if checked[indexPath.row] {
-//            cell.accessoryType = .Checkmark
-//        }
+        //configure you cell here.
+        if !checked[indexPath.row] {
+            cell.accessoryType = .None
+        } else if checked[indexPath.row] {
+            cell.accessoryType = .Checkmark
+        }
+        
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
         if let cell = tableView.cellForRowAtIndexPath(indexPath) {
-            cell.accessoryType = .Checkmark
+            if cell.accessoryType == .Checkmark {
+                cell.accessoryType = .None
+                checked[indexPath.row] = false
+            } else {
+                cell.accessoryType = .Checkmark
+                checked[indexPath.row] = true
+            }
         }
         
         if (indexPath.row == 0) {
@@ -78,11 +86,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     
     }
     
-    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-        if let cell = tableView.cellForRowAtIndexPath(indexPath) {
-            cell.accessoryType = .None
-        }
-    }
+
     
     @IBAction func onVibrateRing(sender: AnyObject) {
         if (vibrateOnRingSwitch.on) {
