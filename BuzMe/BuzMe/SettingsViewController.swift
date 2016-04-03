@@ -11,10 +11,13 @@ import AudioToolbox
 
 class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    @IBOutlet weak var vibrateOnRingSwitch: UISwitch!
+    
+    @IBOutlet weak var vibrateOnSilentSwitch: UISwitch!
+    
     @IBOutlet weak var tableView: UITableView!
     let soundsMap: [String: SystemSoundID]? = ["Choo Choo": 1023, "Descent": 1024, "Minuet": 1027, "News Flash": 1028, "Sherwood Forest": 1030]
-    //var soundNames: [String] = ["Choo Choo", "Descent", "Minuet", "News Flash", "Sherwood Forest"]
-
+   
 
 
     override func viewDidLoad() {
@@ -50,12 +53,16 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if let cell = tableView.cellForRowAtIndexPath(indexPath) {
+            cell.accessoryType = .Checkmark
+        }
+        
         if (indexPath.row == 0) {
-            let soundName = Array(soundsMap!.keys)[4]
+            let soundName = Array(soundsMap!.keys)[0]
             let soundId = soundsMap![soundName]
-            AudioServicesPlaySystemSound(soundId!)
+            AudioServicesPlayAlertSound(soundId!)
         } else if (indexPath.row == 1) {
-            let soundName = Array(soundsMap!.keys)[3]
+            let soundName = Array(soundsMap!.keys)[1]
             let soundId = soundsMap![soundName]
             AudioServicesPlayAlertSound(soundId!)
         } else if (indexPath.row == 2) {
@@ -63,22 +70,33 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             let soundId = soundsMap![soundName]
             AudioServicesPlayAlertSound(soundId!)
         } else if (indexPath.row == 3) {
-            let soundName = Array(soundsMap!.keys)[1]
+            let soundName = Array(soundsMap!.keys)[3]
             let soundId = soundsMap![soundName]
             AudioServicesPlayAlertSound(soundId!)
         } else {
-            let soundName = Array(soundsMap!.keys)[0]
+            let soundName = Array(soundsMap!.keys)[4]
             let soundId = soundsMap![soundName]
             AudioServicesPlayAlertSound(soundId!)
         }
     
     }
     
+    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+        if let cell = tableView.cellForRowAtIndexPath(indexPath) {
+            cell.accessoryType = .None
+        }
+    }
+    
     @IBAction func onVibrateRing(sender: AnyObject) {
-        AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
+        if (vibrateOnRingSwitch.on) {
+            AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
+        }
     }
 
     @IBAction func onVibrateSilent(sender: AnyObject) {
+        if (vibrateOnSilentSwitch.on) {
+            AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
+        }
     }
     
     @IBAction func onClearHistoryPressed(sender: AnyObject) {
