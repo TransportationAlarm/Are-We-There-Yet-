@@ -199,6 +199,9 @@
                             </button>
                             <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="n8Y-rs-ds5">
                                 <rect key="frame" x="58" y="188" width="204" height="31"/>
+                                <connections>
+                                    <action selector="sliderValueChanged:" destination="CpG-ub-5Vh" eventType="valueChanged" id="0p8-cl-VKx"/>
+                                </connections>
                             </slider>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="rsz_11459738693_volume" translatesAutoresizingMaskIntoConstraints="NO" id="a6k-4B-Tij">
                                 <rect key="frame" x="270" y="188" width="30" height="30"/>
@@ -244,7 +247,7 @@
                     <connections>
                         <outlet property="tableView" destination="dYt-Jq-NNy" id="ehW-tn-mxb"/>
                         <outlet property="vibrateOnRingSwitch" destination="NhY-8k-8Ga" id="GN5-vb-ogQ"/>
-                        <outlet property="vibrateOnSilentSwitch" destination="AlR-w2-rr5" id="Qwp-M7-xNq"/>
+                        <outlet property="volumeSlider" destination="n8Y-rs-ds5" id="WpN-fw-ug9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="krs-om-Ree" userLabel="First Responder" sceneMemberID="firstResponder"/>

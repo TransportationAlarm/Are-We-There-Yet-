@@ -7,5 +7,6 @@ target 'BuzMe' do
 
     pod 'Parse'
 
+
 end
 
