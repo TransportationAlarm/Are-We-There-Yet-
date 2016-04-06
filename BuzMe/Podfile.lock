@@ -5,7 +5,7 @@ PODS:
     - Bolts/Tasks (~> 1.6)
 
 DEPENDENCIES:
-  - GoogleMaps (~> 1.10.5)
+  - GoogleMaps
   - Parse
 
 SPEC CHECKSUMS:

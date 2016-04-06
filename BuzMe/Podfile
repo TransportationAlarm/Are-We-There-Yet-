@@ -6,7 +6,7 @@ use_frameworks!
 target 'BuzMe' do
 
     pod 'Parse’
-    pod 'GoogleMaps', '~> 1.10.5'
+    pod 'GoogleMaps'
 
 end
 
