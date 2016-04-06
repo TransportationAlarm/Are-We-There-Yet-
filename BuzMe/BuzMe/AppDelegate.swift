@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import GoogleMaps
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -31,6 +32,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("NavigationController")
             window?.rootViewController = viewController
         }
+        
+        GMSServices.provideAPIKey("AIzaSyA1Zx2qEQi4-1T46wMtnspqnG-cdMxzW14")
         
         
         return true
