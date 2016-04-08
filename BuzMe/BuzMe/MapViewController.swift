@@ -21,12 +21,12 @@ class MapViewController: UIViewController {
         
         placesClient = GMSPlacesClient()
 
-//        let camera = GMSCameraPosition.cameraWithLatitude(-33.86,
-//                                                          longitude: 151.20, zoom: 6)
-//        let mapView = GMSMapView.mapWithFrame(CGRectZero, camera: camera)
-//        mapView.myLocationEnabled = true
-//        self.view = mapView
-//        
+        let camera = GMSCameraPosition.cameraWithLatitude(-33.86,
+                                                          longitude: 151.20, zoom: 6)
+        let mapView = GMSMapView.mapWithFrame(CGRectZero, camera: camera)
+        mapView.myLocationEnabled = true
+        self.view = mapView
+        
 //        let marker = GMSMarker()
 //        marker.position = CLLocationCoordinate2DMake(-33.86, 151.20)
 //        marker.title = "Sydney"
@@ -66,11 +66,14 @@ class MapViewController: UIViewController {
     
     // get current location
     @IBAction func onCurrLocationBtn(sender: AnyObject) {
+        
         placesClient!.currentPlaceWithCallback({ (placeLikelihoods, error) -> Void in
             guard error == nil else {
                 print("Current Place error: \(error!.localizedDescription)")
                 return
             }
+            
+            print("Test")
             
             if let placeLikelihoods = placeLikelihoods {
                 for likelihood in placeLikelihoods.likelihoods {
