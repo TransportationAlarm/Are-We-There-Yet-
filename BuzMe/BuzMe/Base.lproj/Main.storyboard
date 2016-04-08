@@ -255,19 +255,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R9V-wg-78b">
-                                <rect key="frame" x="118" y="301" width="111" height="30"/>
-                                <state key="normal" title="Current location"/>
-                                <connections>
-                                    <action selector="getCurrentPlace:" destination="akp-eS-dX1" eventType="touchUpInside" id="Ijk-z6-o2d"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cYI-Nn-um5">
-                                <rect key="frame" x="72" y="222" width="189" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LDg-Ne-hp1">
                                 <rect key="frame" x="106" y="358" width="109" height="30"/>
                                 <state key="normal" title="Print likelihoods"/>
@@ -275,12 +262,13 @@
                                     <action selector="onCurrLocationBtn:" destination="akp-eS-dX1" eventType="touchUpInside" id="e6E-zR-2Ze"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4jb-w5-5es">
-                                <rect key="frame" x="57" y="262" width="196" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R9V-wg-78b">
+                                <rect key="frame" x="104" y="294" width="111" height="30"/>
+                                <state key="normal" title="Current location"/>
+                                <connections>
+                                    <action selector="getCurrentPlace:" destination="akp-eS-dX1" eventType="touchUpInside" id="Ijk-z6-o2d"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -296,10 +284,6 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <outlet property="addressLabel" destination="4jb-w5-5es" id="zv4-4y-qGM"/>
-                        <outlet property="nameLabel" destination="cYI-Nn-um5" id="nO1-T6-kCG"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4za-L8-ISn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
