@@ -20,12 +20,36 @@ class MapViewController: UIViewController {
         super.viewDidLoad()
         
         placesClient = GMSPlacesClient()
+        
+        placesClient?.currentPlaceWithCallback({
+            (placeLikelihoodList: GMSPlaceLikelihoodList?, error: NSError?) -> Void in
+            if let error = error {
+                print("Pick Place error: \(error.localizedDescription)")
+                return
+            }
+            
+            self.nameLabel.text = "No current place"
+            self.addressLabel.text = ""
+            
+            if let placeLikelihoodList = placeLikelihoodList {
+                let place = placeLikelihoodList.likelihoods.first?.place
+                if let place = place {
+                    print(place.name)
+                    print(place.formattedAddress)
+                    self.nameLabel.text = place.name
+                    print(place.coordinate)
+                    self.addressLabel.text = place.formattedAddress!.componentsSeparatedByString(", ")
+                        .joinWithSeparator("\n")
+                    
+                    let camera = GMSCameraPosition.cameraWithLatitude(place.coordinate.latitude,
+                        longitude: place.coordinate.longitude, zoom: 6)
+                    let mapView = GMSMapView.mapWithFrame(CGRectZero, camera: camera)
+                    mapView.myLocationEnabled = true
+                    self.view = mapView
+                }
+            }
+        })
 
-        let camera = GMSCameraPosition.cameraWithLatitude(-33.86,
-                                                          longitude: 151.20, zoom: 6)
-        let mapView = GMSMapView.mapWithFrame(CGRectZero, camera: camera)
-        mapView.myLocationEnabled = true
-        self.view = mapView
         
 //        let marker = GMSMarker()
 //        marker.position = CLLocationCoordinate2DMake(-33.86, 151.20)
@@ -38,31 +62,7 @@ class MapViewController: UIViewController {
     @IBAction func getCurrentPlace(sender: UIButton) {
         
         
-        placesClient?.currentPlaceWithCallback({
-            (placeLikelihoodList: GMSPlaceLikelihoodList?, error: NSError?) -> Void in
-            if let error = error {
-                print("Pick Place error: \(error.localizedDescription)")
-                return
             }
-            
-            print("1")
-            
-            self.nameLabel.text = "No current place"
-            self.addressLabel.text = ""
-            
-            print("2")
-            if let placeLikelihoodList = placeLikelihoodList {
-                let place = placeLikelihoodList.likelihoods.first?.place
-                print("3")
-                if let place = place {
-                    print("4")
-                    self.nameLabel.text = place.name
-                    self.addressLabel.text = place.formattedAddress!.componentsSeparatedByString(", ")
-                        .joinWithSeparator("\n")
-                }
-            }
-        })
-    }
     
     // get current location
     @IBAction func onCurrLocationBtn(sender: AnyObject) {
