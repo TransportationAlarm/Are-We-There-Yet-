@@ -55,6 +55,17 @@ Here's a walkthrough of implemented user stories:
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
+
+Here's a walkthrough of implemented user stories for the second week:
+
+<img src='http://imgur.com/LhRlHhz.gif' title='Video Walkthrough 2' width='' alt='Video Walkthrough' />
+
+
+
+GIF created with [LiceCap](http://www.cockos.com/licecap/).
+
+
+
 ## Notes
 
 Describe any challenges encountered while building the app.
