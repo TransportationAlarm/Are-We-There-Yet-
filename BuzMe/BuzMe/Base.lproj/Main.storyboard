@@ -257,14 +257,18 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LDg-Ne-hp1">
                                 <rect key="frame" x="106" y="358" width="109" height="30"/>
-                                <state key="normal" title="Print likelihoods"/>
+                                <state key="normal" title="Print likelihoods">
+                                    <color key="titleColor" red="0.97977561940000002" green="0.9702191295" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="onCurrLocationBtn:" destination="akp-eS-dX1" eventType="touchUpInside" id="e6E-zR-2Ze"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R9V-wg-78b">
                                 <rect key="frame" x="104" y="294" width="111" height="30"/>
-                                <state key="normal" title="Current location"/>
+                                <state key="normal" title="Current location">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                                 <connections>
                                     <action selector="getCurrentPlace:" destination="akp-eS-dX1" eventType="touchUpInside" id="Ijk-z6-o2d"/>
                                 </connections>
