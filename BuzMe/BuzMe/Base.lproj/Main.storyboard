@@ -188,7 +188,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="gva-le-3hQ" kind="unwind" unwindAction="logoutToLoginScreen:" id="C1R-wf-yzZ"/>
+                                    <segue destination="BYZ-38-t0r" kind="modal" identifier="logoutSegue" id="x1a-jn-Afi"/>
                                 </connections>
                             </button>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AlR-w2-rr5">
@@ -239,7 +239,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="krs-om-Ree" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="gva-le-3hQ" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1301" y="342"/>
         </scene>
