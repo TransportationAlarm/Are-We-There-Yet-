@@ -37,6 +37,7 @@ class MapViewController: UIViewController {
     // Add a UIButton in Interface Builder to call this function
     @IBAction func getCurrentPlace(sender: UIButton) {
         
+        
         placesClient?.currentPlaceWithCallback({
             (placeLikelihoodList: GMSPlaceLikelihoodList?, error: NSError?) -> Void in
             if let error = error {
@@ -44,12 +45,17 @@ class MapViewController: UIViewController {
                 return
             }
             
+            print("1")
+            
             self.nameLabel.text = "No current place"
             self.addressLabel.text = ""
             
+            print("2")
             if let placeLikelihoodList = placeLikelihoodList {
                 let place = placeLikelihoodList.likelihoods.first?.place
+                print("3")
                 if let place = place {
+                    print("4")
                     self.nameLabel.text = place.name
                     self.addressLabel.text = place.formattedAddress!.componentsSeparatedByString(", ")
                         .joinWithSeparator("\n")
@@ -69,10 +75,10 @@ class MapViewController: UIViewController {
             if let placeLikelihoods = placeLikelihoods {
                 for likelihood in placeLikelihoods.likelihoods {
                     let place = likelihood.place
-                    print("Current Place name \(place.name) at likelihood \(likelihood.likelihood)")
-                    print("Current Place address \(place.formattedAddress)")
-                    print("Current Place attributions \(place.attributions)")
-                    print("Current PlaceID \(place.placeID)")
+//                    print("Current Place name \(place.name) at likelihood \(likelihood.likelihood)")
+//                    print("Current Place address \(place.formattedAddress)")
+//                    print("Current Place attributions \(place.attributions)")
+//                    print("Current PlaceID \(place.placeID)")
                 }
             }
         })
