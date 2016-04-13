@@ -139,7 +139,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uin-CQ-kMf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="895" y="1023"/>
+            <point key="canvasLocation" x="1663" y="342"/>
         </scene>
         <!--Settings View Controller-->
         <scene sceneID="SpA-op-a3L">
@@ -231,7 +231,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="cU3-dQ-zF8"/>
+                    <navigationItem key="navigationItem" id="cU3-dQ-zF8">
+                        <barButtonItem key="rightBarButtonItem" title="History" id="L5w-28-7Hy">
+                            <connections>
+                                <segue destination="17z-uJ-M7e" kind="push" id="15L-Xv-gsd"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="dYt-Jq-NNy" id="ehW-tn-mxb"/>
                         <outlet property="vibrateOnRingSwitch" destination="NhY-8k-8Ga" id="GN5-vb-ogQ"/>
@@ -254,17 +260,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LDg-Ne-hp1">
-                                <rect key="frame" x="154" y="178" width="109" height="30"/>
-                                <state key="normal" title="Print likelihoods">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="onCurrLocationBtn:" destination="akp-eS-dX1" eventType="touchUpInside" id="e6E-zR-2Ze"/>
-                                </connections>
-                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gH7-H6-xfB">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="gH7-H6-xfB" firstAttribute="leading" secondItem="X6H-cp-U2H" secondAttribute="leading" id="9pz-eQ-7Rw"/>
+                            <constraint firstItem="aAj-Ob-hDS" firstAttribute="top" secondItem="gH7-H6-xfB" secondAttribute="bottom" id="ZYV-9M-R5p"/>
+                            <constraint firstItem="gH7-H6-xfB" firstAttribute="top" secondItem="Yti-Ti-WQx" secondAttribute="bottom" id="lTj-rb-zVa"/>
+                            <constraint firstAttribute="trailing" secondItem="gH7-H6-xfB" secondAttribute="trailing" id="xCI-dz-9zw"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="RWa-8d-vVA">
                         <barButtonItem key="leftBarButtonItem" title="Settings" id="4uJ-pg-AdO">
@@ -272,12 +279,15 @@
                                 <segue destination="CpG-ub-5Vh" kind="push" id="jDq-Ld-adH"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="History" id="L5w-28-7Hy">
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="o8s-ih-1da">
                             <connections>
-                                <segue destination="17z-uJ-M7e" kind="push" id="15L-Xv-gsd"/>
+                                <action selector="searchWithAddress:" destination="akp-eS-dX1" id="kiA-sE-Ktg"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="googleMapsContainer" destination="gH7-H6-xfB" id="Gnj-t1-pa6"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4za-L8-ISn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

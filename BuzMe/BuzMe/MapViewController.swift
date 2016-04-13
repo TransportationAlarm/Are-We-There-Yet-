@@ -9,9 +9,13 @@
 import UIKit
 import GoogleMaps
 
-class MapViewController: UIViewController {
+class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap {
     
-
+    @IBOutlet weak var googleMapsContainer: UIView!
+    
+    var googleMapsView: GMSMapView!
+    var searchResultController: SearchResultsController!
+    var resultsArray = [String]()
 
     var placesClient: GMSPlacesClient?
     
@@ -19,11 +23,62 @@ class MapViewController: UIViewController {
         super.viewDidLoad()
 
         placesClient = GMSPlacesClient()
-        getCurrentLocation()
+        //getCurrentLocation()
 
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
+        
+        self.googleMapsView = GMSMapView(frame: self.googleMapsContainer.frame)
+        self.view.addSubview(self.googleMapsView)
+        
+        searchResultController = SearchResultsController()
+        searchResultController.delegate = self
+    }
     
+    @IBAction func searchWithAddress(sender: AnyObject) {
+        let searchController = UISearchController(searchResultsController: searchResultController)
+        searchController.searchBar.delegate = self
+        self.presentViewController(searchController, animated: true, completion: nil)
+        
+    }
+    
+    func locateWithLongitude(long: Double, andLatitude lat: Double, andTitle title: String) {
+        dispatch_async(dispatch_get_main_queue()) {
+            
+            
+            
+            let position = CLLocationCoordinate2DMake(lat, long)
+            let marker = GMSMarker(position: position)
+            
+            let camera = GMSCameraPosition.cameraWithLatitude(lat, longitude: long, zoom: 6)
+            self.googleMapsView.camera = camera
+            
+            marker.title = title
+            marker.map = self.googleMapsView
+            
+            self.searchResultController.reloadInputViews()
+        }
+    }
+        
+    func searchBar(searchBar: UISearchBar,
+                   textDidChange searchText: String){
+        
+        let placesClient = GMSPlacesClient()
+        placesClient.autocompleteQuery(searchText, bounds: nil, filter: nil) { (results, error:NSError?) -> Void in
+            self.resultsArray.removeAll()
+            if results == nil {
+                return
+            }
+            for result in results!{
+                if let result = result as? GMSAutocompletePrediction{
+                    self.resultsArray.append(result.attributedFullText.string)
+                }
+            }
+            self.searchResultController.reloadDataWithArray(self.resultsArray)
+        }
+    }
     
     func getCurrentLocation() {
         placesClient?.currentPlaceWithCallback({
@@ -51,13 +106,11 @@ class MapViewController: UIViewController {
                     
                     self.view = mapView
 
-                    
                     mapView.myLocationEnabled = true
-
                     
-                    let marker = GMSMarker()
-                    marker.position = CLLocationCoordinate2DMake(lat, long)
-                    marker.map = mapView
+//                    let marker = GMSMarker()
+//                    marker.position = CLLocationCoordinate2DMake(lat, long)
+//                    marker.map = mapView
                     
                     mapView.settings.myLocationButton = true
                     mapView.settings.scrollGestures = true
@@ -67,28 +120,7 @@ class MapViewController: UIViewController {
         })
     }
     
-    // get current location
-    @IBAction func onCurrLocationBtn(sender: AnyObject) {
-        
-        placesClient!.currentPlaceWithCallback({ (placeLikelihoods, error) -> Void in
-            guard error == nil else {
-                print("Current Place error: \(error!.localizedDescription)")
-                return
-            }
-            
-            print("Test")
-            
-            if let placeLikelihoods = placeLikelihoods {
-                for likelihood in placeLikelihoods.likelihoods {
-                    _ = likelihood.place
-//                    print("Current Place name \(place.name) at likelihood \(likelihood.likelihood)")
-//                    print("Current Place address \(place.formattedAddress)")
-//                    print("Current Place attributions \(place.attributions)")
-//                    print("Current PlaceID \(place.placeID)")
-                }
-            }
-        })
-    }
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

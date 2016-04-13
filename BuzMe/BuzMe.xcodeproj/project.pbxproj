@@ -19,6 +19,7 @@
 		08AC56941CAE173400B5C8F5 /* AlarmTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AC56931CAE173400B5C8F5 /* AlarmTableViewCell.swift */; };
 		08AC56961CAE174600B5C8F5 /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AC56951CAE174600B5C8F5 /* HistoryTableViewCell.swift */; };
 		21080BA371734F0FA9121C40 /* Pods_BuzMe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B2BCDFAF19EF28B7FC45A41 /* Pods_BuzMe.framework */; };
+		F2A5124A1CBDEB0A00A6132A /* SearchResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A512491CBDEB0A00A6132A /* SearchResultsController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		1B2BCDFAF19EF28B7FC45A41 /* Pods_BuzMe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BuzMe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD761A3A1B486CC6A2DFC6E5 /* Pods-BuzMe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BuzMe.release.xcconfig"; path = "Pods/Target Support Files/Pods-BuzMe/Pods-BuzMe.release.xcconfig"; sourceTree = "<group>"; };
 		D0585915CCE963BFCBDBD60D /* Pods-BuzMe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BuzMe.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BuzMe/Pods-BuzMe.debug.xcconfig"; sourceTree = "<group>"; };
+		F2A512491CBDEB0A00A6132A /* SearchResultsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				080B243E1CACE63200EE658A /* MapViewController.swift */,
 				080B24401CACE63D00EE658A /* SettingsViewController.swift */,
 				080B24421CACE64600EE658A /* HistoryViewController.swift */,
+				F2A512491CBDEB0A00A6132A /* SearchResultsController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -257,6 +260,7 @@
 				080B243F1CACE63200EE658A /* MapViewController.swift in Sources */,
 				08AC56961CAE174600B5C8F5 /* HistoryTableViewCell.swift in Sources */,
 				08AC56901CAE16C600B5C8F5 /* User.swift in Sources */,
+				F2A5124A1CBDEB0A00A6132A /* SearchResultsController.swift in Sources */,
 				087CF34D1CAB665200A6319D /* AppDelegate.swift in Sources */,
 				080B24431CACE64600EE658A /* HistoryViewController.swift in Sources */,
 				08AC56941CAE173400B5C8F5 /* AlarmTableViewCell.swift in Sources */,
