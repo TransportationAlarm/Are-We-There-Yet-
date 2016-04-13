@@ -289,7 +289,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="holdsMapView" destination="lsh-Tq-YE1" id="Qah-6h-57j"/>
+                        <outlet property="holdsMapView" destination="lsh-Tq-YE1" id="f7R-Rc-eCp"/>
                         <outlet property="holdsSearchBarView" destination="Heh-KB-lKV" id="kmC-f1-9rT"/>
                     </connections>
                 </viewController>

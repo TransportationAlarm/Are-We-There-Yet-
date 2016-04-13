@@ -12,9 +12,9 @@ import GoogleMaps
 class MapViewController: UIViewController {
     
 
+    @IBOutlet weak var holdsMapView: GMSMapView!
     @IBOutlet weak var holdsSearchBarView: UIView!
     @IBOutlet weak var searchBarTextField: UITextField!
-    @IBOutlet weak var holdsMapView: UIView!
     var placesClient: GMSPlacesClient?
     
     override func viewDidLoad() {
@@ -61,7 +61,7 @@ class MapViewController: UIViewController {
                     marker.position = CLLocationCoordinate2DMake(lat, long)
                     marker.map = mapView
                     
-                    mapView.settings.myLocationButton = true
+                    self.holdsMapView.settings.myLocationButton = true
                     mapView.settings.scrollGestures = true
                     mapView.settings.zoomGestures = true 
                 }
