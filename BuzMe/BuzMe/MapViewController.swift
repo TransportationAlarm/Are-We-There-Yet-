@@ -11,15 +11,21 @@ import GoogleMaps
 
 class MapViewController: UIViewController {
     
+
+    @IBOutlet weak var holdsSearchBarView: UIView!
+    @IBOutlet weak var searchBarTextField: UITextField!
+    @IBOutlet weak var holdsMapView: UIView!
     var placesClient: GMSPlacesClient?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         placesClient = GMSPlacesClient()
-        
         getCurrentLocation()
+
     }
+    
+    
     
     func getCurrentLocation() {
         placesClient?.currentPlaceWithCallback({
@@ -44,22 +50,23 @@ class MapViewController: UIViewController {
                     let camera = GMSCameraPosition.cameraWithLatitude(lat,
                         longitude: long, zoom: 6)
                     let mapView = GMSMapView.mapWithFrame(CGRectZero, camera: camera)
+                    
+                    self.holdsMapView.addSubview(mapView)
+                    self.holdsMapView.addSubview(self.holdsSearchBarView)
+                    
                     mapView.myLocationEnabled = true
-                    self.view = mapView
+
                     
                     let marker = GMSMarker()
                     marker.position = CLLocationCoordinate2DMake(lat, long)
-                    //                    marker.title = "Sydney"
-                    //                    marker.snippet = "Australia"
                     marker.map = mapView
+                    
+                    mapView.settings.myLocationButton = true
+                    mapView.settings.scrollGestures = true
+                    mapView.settings.zoomGestures = true 
                 }
             }
         })
-    }
-    
-    // Add a UIButton in Interface Builder to call this function
-    @IBAction func getCurrentPlace(sender: UIButton) {
-        getCurrentLocation()
     }
     
     // get current location
@@ -75,7 +82,7 @@ class MapViewController: UIViewController {
             
             if let placeLikelihoods = placeLikelihoods {
                 for likelihood in placeLikelihoods.likelihoods {
-                    let place = likelihood.place
+                    _ = likelihood.place
 //                    print("Current Place name \(place.name) at likelihood \(likelihood.likelihood)")
 //                    print("Current Place address \(place.formattedAddress)")
 //                    print("Current Place attributions \(place.attributions)")
