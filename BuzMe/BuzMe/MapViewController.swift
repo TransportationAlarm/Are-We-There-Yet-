@@ -54,16 +54,16 @@ class MapViewController: UIViewController {
                     self.holdsMapView.addSubview(mapView)
                     self.holdsMapView.addSubview(self.holdsSearchBarView)
                     
-                    mapView.myLocationEnabled = true
+                    self.holdsMapView.myLocationEnabled = true
 
                     
                     let marker = GMSMarker()
                     marker.position = CLLocationCoordinate2DMake(lat, long)
-                    marker.map = mapView
+                    marker.map = self.holdsMapView
                     
                     self.holdsMapView.settings.myLocationButton = true
-                    mapView.settings.scrollGestures = true
-                    mapView.settings.zoomGestures = true 
+                    self.holdsMapView.settings.scrollGestures = true
+                    self.holdsMapView.settings.zoomGestures = true
                 }
             }
         })
