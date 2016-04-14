@@ -24,6 +24,8 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap {
 
         placesClient = GMSPlacesClient()
         //getCurrentLocation()
+        
+
 
     }
     
@@ -35,6 +37,9 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap {
         
         searchResultController = SearchResultsController()
         searchResultController.delegate = self
+        
+        googleMapsView.myLocationEnabled = true
+        googleMapsView.settings.myLocationButton = true
     }
     
     @IBAction func searchWithAddress(sender: AnyObject) {
