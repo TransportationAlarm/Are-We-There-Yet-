@@ -23,7 +23,7 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap {
         super.viewDidLoad()
 
         placesClient = GMSPlacesClient()
-        //getCurrentLocation()
+        getCurrentLocation()
         
 
 
@@ -40,6 +40,8 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap {
         
         googleMapsView.myLocationEnabled = true
         googleMapsView.settings.myLocationButton = true
+        
+        getCurrentLocation()
     }
     
     @IBAction func searchWithAddress(sender: AnyObject) {
@@ -106,7 +108,7 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap {
                     let long = place.coordinate.longitude
                     
                     let camera = GMSCameraPosition.cameraWithLatitude(lat,
-                        longitude: long, zoom: 6)
+                        longitude: long, zoom: 16)
                     let mapView = GMSMapView.mapWithFrame(CGRectZero, camera: camera)
                     
                     self.view = mapView
