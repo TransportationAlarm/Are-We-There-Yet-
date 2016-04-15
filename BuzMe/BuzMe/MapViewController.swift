@@ -8,7 +8,6 @@
 
 import UIKit
 import GoogleMaps
-import MBProgressHUD
 
 class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, GMSMapViewDelegate {
     
