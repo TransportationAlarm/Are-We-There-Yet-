@@ -260,9 +260,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I4H-3i-a63">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I4H-3i-a63">
                                 <rect key="frame" x="0.0" y="514" width="320" height="54"/>
                                 <color key="backgroundColor" red="0.4010329279" green="0.7565495471" blue="0.60776570269999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="54" id="Sd3-hc-tPY"/>
+                                </constraints>
                                 <state key="normal" title="Set Alarm">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -270,7 +273,7 @@
                                     <action selector="onSetAlarm:" destination="akp-eS-dX1" eventType="touchUpInside" id="hfa-Vw-8My"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jmf-wB-xYK">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jmf-wB-xYK">
                                 <rect key="frame" x="0.0" y="64" width="320" height="31"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Drag marker to desired bus stop, set alarm" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L6I-lB-67f">
@@ -281,6 +284,9 @@
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="31" id="Lgs-hi-nPj"/>
+                                </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gH7-H6-xfB">
                                 <rect key="frame" x="0.0" y="95" width="320" height="419"/>
@@ -289,10 +295,20 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="jmf-wB-xYK" secondAttribute="trailing" id="0m6-lm-5N2"/>
+                            <constraint firstAttribute="trailing" secondItem="I4H-3i-a63" secondAttribute="trailing" id="5cY-Ll-d5g"/>
+                            <constraint firstItem="jmf-wB-xYK" firstAttribute="top" secondItem="Yti-Ti-WQx" secondAttribute="bottom" id="6E5-6z-2Iy"/>
+                            <constraint firstItem="I4H-3i-a63" firstAttribute="top" secondItem="gH7-H6-xfB" secondAttribute="bottom" id="6Na-rs-W2w"/>
                             <constraint firstItem="gH7-H6-xfB" firstAttribute="leading" secondItem="X6H-cp-U2H" secondAttribute="leading" id="9pz-eQ-7Rw"/>
+                            <constraint firstItem="gH7-H6-xfB" firstAttribute="leading" secondItem="X6H-cp-U2H" secondAttribute="leading" id="Mq3-vO-NID"/>
+                            <constraint firstItem="gH7-H6-xfB" firstAttribute="top" secondItem="jmf-wB-xYK" secondAttribute="bottom" id="TuQ-Ge-uk6"/>
+                            <constraint firstAttribute="trailing" secondItem="gH7-H6-xfB" secondAttribute="trailing" id="XAp-wz-HhH"/>
+                            <constraint firstItem="jmf-wB-xYK" firstAttribute="leading" secondItem="X6H-cp-U2H" secondAttribute="leading" id="XTZ-iU-NZC"/>
                             <constraint firstItem="aAj-Ob-hDS" firstAttribute="top" secondItem="gH7-H6-xfB" secondAttribute="bottom" constant="54" id="ZYV-9M-R5p"/>
                             <constraint firstItem="gH7-H6-xfB" firstAttribute="top" secondItem="Yti-Ti-WQx" secondAttribute="bottom" constant="31" id="lTj-rb-zVa"/>
+                            <constraint firstItem="I4H-3i-a63" firstAttribute="leading" secondItem="X6H-cp-U2H" secondAttribute="leading" id="rj9-pg-Iyf"/>
                             <constraint firstAttribute="trailing" secondItem="gH7-H6-xfB" secondAttribute="trailing" id="xCI-dz-9zw"/>
+                            <constraint firstItem="aAj-Ob-hDS" firstAttribute="top" secondItem="I4H-3i-a63" secondAttribute="bottom" id="zPL-oc-VkN"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="BuzMe" id="RWa-8d-vVA">
