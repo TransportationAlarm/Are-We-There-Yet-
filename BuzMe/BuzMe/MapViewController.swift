@@ -59,11 +59,12 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap {
             let position = CLLocationCoordinate2DMake(lat, long)
             let marker = GMSMarker(position: position)
             
-            let camera = GMSCameraPosition.cameraWithLatitude(lat, longitude: long, zoom: 6)
+            let camera = GMSCameraPosition.cameraWithLatitude(lat, longitude: long, zoom: 18)
             self.googleMapsView.camera = camera
             
             marker.title = title
             marker.map = self.googleMapsView
+            marker.draggable = true
             
             self.searchResultController.reloadInputViews()
         }
