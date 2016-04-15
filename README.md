@@ -25,15 +25,14 @@ those who sleep or fall asleep on public transportation, such as busses or train
 
 The following **required** functionality is completed:
 - [x] Allow user to sign up/log in to store account info
-- [ ] Alerts user (via alarm or vibrate) when they are approaching desination
+- [x] Alerts user (via alarm or vibrate) when they are approaching desination
 - [x] Add in Google Maps SDK and Tracks user's current location
 - [x] Implement Settings Page
-- [ ] Keep track of history of users trips
 
 The following **optional** features are implemented:
 
 - [ ] Change the time that the alarm alerts the user 
-- [ ] Allow user to set start location
+- [ ] Keep track of history of users trips
 
 
 The following **additional** features are implemented:
