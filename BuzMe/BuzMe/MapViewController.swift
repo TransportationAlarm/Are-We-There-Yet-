@@ -10,7 +10,7 @@ import UIKit
 import SRKUtility
 import GoogleMaps
 
-class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap {
+class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, GMSMapViewDelegate {
     
     @IBOutlet weak var googleMapsContainer: UIView!
     
@@ -26,9 +26,12 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap {
         placesClient = GMSPlacesClient()
         //getCurrentLocation()
         
+        
 
 
     }
+
+
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
@@ -41,6 +44,9 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap {
         
         googleMapsView.myLocationEnabled = true
         googleMapsView.settings.myLocationButton = true
+        
+        googleMapsView.delegate = self
+        self.view = googleMapsView
         
         //getCurrentLocation()
         
@@ -63,6 +69,10 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap {
 //            }
 //        }
     }
+    
+    // MARK: GMSMapViewDelegate
+    
+
     
     func parseAndDisplayDirection(objD:NSDictionary) {
         if let routes = objD.valueForKey("routes") as? NSArray {
