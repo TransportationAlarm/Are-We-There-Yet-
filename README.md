@@ -25,7 +25,7 @@ those who sleep or fall asleep on public transportation, such as busses or train
 
 The following **required** functionality is completed:
 - [x] Allow user to sign up/log in to store account info
-- [x] Alerts user (via alarm or vibrate) when they are approaching desination
+- [ ] Alerts user (via alarm or vibrate) when they are approaching desination
 - [x] Add in Google Maps SDK and Tracks user's current location
 - [x] Implement Settings Page
 - [ ] Keep track of history of users trips
@@ -33,7 +33,7 @@ The following **required** functionality is completed:
 The following **optional** features are implemented:
 
 - [ ] Change the time that the alarm alerts the user 
-- [ ] Keep track of history of users trips
+- [ ] Allow user to set start location
 
 
 The following **additional** features are implemented:
@@ -54,6 +54,11 @@ Here's a walkthrough of implemented user stories:
 Here's a walkthrough of implemented user stories for the second week:
 
 <img src='https://github.com/TransportationAlarm/BuzMe/blob/master/BuzMeWalk2.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
+
+Here's a walkthrough of implemented user stories for the third week:
+
+<img src='http://imgur.com/cMnIkZB.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
