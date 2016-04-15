@@ -118,11 +118,7 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap {
             let position = CLLocationCoordinate2DMake(lat, long)
             let marker = GMSMarker(position: position)
             
-<<<<<<< HEAD
-            let camera = GMSCameraPosition.cameraWithLatitude(lat, longitude: long, zoom: 16)
-=======
             let camera = GMSCameraPosition.cameraWithLatitude(lat, longitude: long, zoom: 18)
->>>>>>> 54dc928c8bdc5e62b974ec1b68ec2a90b2973211
             self.googleMapsView.camera = camera
             
             marker.title = title
