@@ -169,6 +169,14 @@
 					087CF3481CAB665100A6319D = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = Q3VQ743SQK;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Maps.iOS = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
