@@ -85,9 +85,15 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-BuzMe/Bolts.framework"
+  install_framework "Pods-BuzMe/KSReachability.framework"
+  install_framework "Pods-BuzMe/MBProgressHUD.framework"
   install_framework "Pods-BuzMe/Parse.framework"
+  install_framework "Pods-BuzMe/SRKUtility.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-BuzMe/Bolts.framework"
+  install_framework "Pods-BuzMe/KSReachability.framework"
+  install_framework "Pods-BuzMe/MBProgressHUD.framework"
   install_framework "Pods-BuzMe/Parse.framework"
+  install_framework "Pods-BuzMe/SRKUtility.framework"
 fi
