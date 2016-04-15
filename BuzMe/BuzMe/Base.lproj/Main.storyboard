@@ -248,7 +248,7 @@
             </objects>
             <point key="canvasLocation" x="1301" y="342"/>
         </scene>
-        <!--Map View Controller-->
+        <!--BuzMe-->
         <scene sceneID="3xc-Rq-kgm">
             <objects>
                 <viewController id="akp-eS-dX1" customClass="MapViewController" customModule="BuzMe" customModuleProvider="target" sceneMemberID="viewController">
@@ -295,7 +295,7 @@
                             <constraint firstAttribute="trailing" secondItem="gH7-H6-xfB" secondAttribute="trailing" id="xCI-dz-9zw"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="RWa-8d-vVA">
+                    <navigationItem key="navigationItem" title="BuzMe" id="RWa-8d-vVA">
                         <barButtonItem key="leftBarButtonItem" title="Settings" id="4uJ-pg-AdO">
                             <connections>
                                 <segue destination="CpG-ub-5Vh" kind="push" id="jDq-Ld-adH"/>
