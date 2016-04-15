@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SRKUtility
 import GoogleMaps
 
 class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap {
