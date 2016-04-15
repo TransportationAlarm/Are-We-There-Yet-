@@ -260,16 +260,35 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I4H-3i-a63">
+                                <rect key="frame" x="0.0" y="514" width="320" height="54"/>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Set Alarm">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jmf-wB-xYK">
+                                <rect key="frame" x="0.0" y="64" width="320" height="31"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Drag Marker to Desired Bus Stop, Set Alarm" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L6I-lB-67f">
+                                        <rect key="frame" x="8" y="7" width="300" height="18"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gH7-H6-xfB">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <rect key="frame" x="0.0" y="95" width="320" height="419"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="gH7-H6-xfB" firstAttribute="leading" secondItem="X6H-cp-U2H" secondAttribute="leading" id="9pz-eQ-7Rw"/>
-                            <constraint firstItem="aAj-Ob-hDS" firstAttribute="top" secondItem="gH7-H6-xfB" secondAttribute="bottom" id="ZYV-9M-R5p"/>
-                            <constraint firstItem="gH7-H6-xfB" firstAttribute="top" secondItem="Yti-Ti-WQx" secondAttribute="bottom" id="lTj-rb-zVa"/>
+                            <constraint firstItem="aAj-Ob-hDS" firstAttribute="top" secondItem="gH7-H6-xfB" secondAttribute="bottom" constant="54" id="ZYV-9M-R5p"/>
+                            <constraint firstItem="gH7-H6-xfB" firstAttribute="top" secondItem="Yti-Ti-WQx" secondAttribute="bottom" constant="31" id="lTj-rb-zVa"/>
                             <constraint firstAttribute="trailing" secondItem="gH7-H6-xfB" secondAttribute="trailing" id="xCI-dz-9zw"/>
                         </constraints>
                     </view>
@@ -286,7 +305,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="directionsView" destination="jmf-wB-xYK" id="w2x-97-3uM"/>
                         <outlet property="googleMapsContainer" destination="gH7-H6-xfB" id="Gnj-t1-pa6"/>
+                        <outlet property="setAlarmButton" destination="I4H-3i-a63" id="cfu-PJ-scB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4za-L8-ISn" userLabel="First Responder" sceneMemberID="firstResponder"/>
