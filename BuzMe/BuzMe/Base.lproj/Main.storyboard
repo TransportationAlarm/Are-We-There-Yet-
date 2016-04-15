@@ -262,10 +262,13 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I4H-3i-a63">
                                 <rect key="frame" x="0.0" y="514" width="320" height="54"/>
-                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.4010329279" green="0.7565495471" blue="0.60776570269999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Set Alarm">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="onSetAlarm:" destination="akp-eS-dX1" eventType="touchUpInside" id="hfa-Vw-8My"/>
+                                </connections>
                             </button>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jmf-wB-xYK">
                                 <rect key="frame" x="0.0" y="64" width="320" height="31"/>

@@ -159,6 +159,10 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
         }
     }
     
+    @IBAction func onSetAlarm(sender: AnyObject) {
+        
+    }
+    
     func getCurrentLocation() {
         placesClient?.currentPlaceWithCallback({
             (placeLikelihoodList: GMSPlaceLikelihoodList?, error: NSError?) -> Void in
