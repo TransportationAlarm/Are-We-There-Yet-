@@ -7,7 +7,7 @@ target 'BuzMe' do
 
     pod 'Parse'
     pod 'GoogleMaps'
-    pod 'SRKUtility'
+    pod 'SDCAlertView', '~> 5.0'
 
 end
 

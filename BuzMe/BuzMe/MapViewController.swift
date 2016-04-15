@@ -8,6 +8,7 @@
 
 import UIKit
 import GoogleMaps
+import MBProgressHUD
 
 class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, GMSMapViewDelegate {
     
@@ -47,7 +48,6 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
         googleMapsView.settings.myLocationButton = true
         
         googleMapsView.delegate = self
-        self.view = googleMapsView
         
         //getCurrentLocation()
         
@@ -159,6 +159,20 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
     }
     
     @IBAction func onSetAlarm(sender: AnyObject) {
+        let alertController = UIAlertController(title: "Alert", message: "Alarm has been set!", preferredStyle: UIAlertControllerStyle.Alert)
+        
+//        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default)
+//        { action -> Void in
+//            // Put your code here
+//            })
+        self.presentViewController(alertController, animated: true, completion: nil)
+        
+        let delay = 1.0 * Double(NSEC_PER_SEC)
+        let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+        dispatch_after(time, dispatch_get_main_queue(), {
+            alertController.dismissViewControllerAnimated(true, completion: nil)
+        })
+
         
     }
     
