@@ -11,7 +11,9 @@ import GoogleMaps
 
 class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap {
     
+    @IBOutlet weak var setAlarmButton: UIButton!
     @IBOutlet weak var googleMapsContainer: UIView!
+    @IBOutlet weak var directionsView: UIView!
     
     var googleMapsView: GMSMapView!
     var searchResultController: SearchResultsController!
@@ -54,7 +56,7 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap {
     func locateWithLongitude(long: Double, andLatitude lat: Double, andTitle title: String) {
         dispatch_async(dispatch_get_main_queue()) {
             
-            
+            self.googleMapsView.clear()
             
             let position = CLLocationCoordinate2DMake(lat, long)
             let marker = GMSMarker(position: position)
