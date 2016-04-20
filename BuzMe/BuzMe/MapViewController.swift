@@ -9,11 +9,20 @@
 import UIKit
 import GoogleMaps
 
-class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, GMSMapViewDelegate {
+class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, GMSMapViewDelegate, CLLocationManagerDelegate {
     
     @IBOutlet weak var setAlarmButton: UIButton!
     @IBOutlet weak var googleMapsContainer: UIView!
     @IBOutlet weak var directionsView: UIView!
+    
+    let locationManager = CLLocationManager()
+    
+    var marker: GMSMarker!
+    
+    var destinationLat: Double!
+    var destiinationLong: Double!
+    var currentLat: Double!
+    var currentLong: Double!
     
     var googleMapsView: GMSMapView!
     var searchResultController: SearchResultsController!
@@ -23,6 +32,18 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Ask for Authorisation from the User.
+        self.locationManager.requestAlwaysAuthorization()
+        
+        // For use in foreground
+        self.locationManager.requestWhenInUseAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.startUpdatingLocation()
+        }
 
         placesClient = GMSPlacesClient()
         //getCurrentLocation()
@@ -32,8 +53,6 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
 
     }
 
-
-    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
         
@@ -111,6 +130,31 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
                 }
             }
         }
+    }
+    
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let locValue:CLLocationCoordinate2D = manager.location!.coordinate
+        print("locations = \(locValue.latitude) \(locValue.longitude)")
+        
+        self.currentLat = locValue.latitude
+        self.currentLong = locValue.longitude
+    }
+    
+    func mapView(mapViewUIView: GMSMapView!, didTapAtCoordinate coordinate:CLLocationCoordinate2D) {
+        
+        self.googleMapsView.clear()
+
+        let marker = GMSMarker()
+        
+        marker.position.latitude = coordinate.latitude
+        marker.position.longitude = coordinate.longitude
+        marker.map = googleMapsView
+    
+        print(marker.position.latitude)
+        
+        destinationLat = coordinate.latitude
+        destiinationLong = coordinate.longitude
+        
     }
     
     @IBAction func searchWithAddress(sender: AnyObject) {
@@ -222,6 +266,14 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
         // Dispose of any resources that can be recreated.
     }
     
+    func getDistanceData() {
+        
+        let apiKey = "AIzaSyA1Zx2qEQi4-1T46wMtnspqnG-cdMxzW14"
+    
+        let url = NSURL(string: "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=\(self.currentLat),\(self.currentLong)&destinations=\(self.destinationLat),\(self.destinationLong)&key=\(apiKey)")
+        
+    }
+
 
     /*
     // MARK: - Navigation

@@ -17,6 +17,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     
     @IBOutlet weak var tableView: UITableView!
     
+    var selctedRow: Int!
     var audioPlayer: AVAudioPlayer!
     
     let soundsMap: [String: SystemSoundID]? = ["Choo Choo": 1023, "Descent": 1024, "Minuet": 1027, "News Flash": 1028, "Sherwood Forest": 1030]
@@ -44,10 +45,11 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         let soundName = Array(soundsMap!.keys)
         cell.textLabel?.text = soundName[indexPath.row]
         
-        if !checked[indexPath.row] {
-            cell.accessoryType = .None
-        } else if checked[indexPath.row] {
+        
+        if (indexPath == selctedRow) {
             cell.accessoryType = .Checkmark
+        } else {
+            cell.accessoryType = .None
         }
         
         return cell
@@ -56,13 +58,22 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         if let cell = tableView.cellForRowAtIndexPath(indexPath) {
-            if cell.accessoryType == .Checkmark {
-                cell.accessoryType = .None
-                checked[indexPath.row] = false
-            } else {
+            
+            self.selctedRow = indexPath.row
+            
+            if (indexPath == self.selctedRow) {
                 cell.accessoryType = .Checkmark
-                checked[indexPath.row] = true
+            } else {
+                cell.accessoryType = .None
             }
+            
+//            if cell.accessoryType == .Checkmark {
+//                cell.accessoryType = .None
+//                checked[indexPath.row] = false
+//            } else {
+//                cell.accessoryType = .Checkmark
+//                checked[indexPath.row] = true
+//            }
         }
         
         if (indexPath.row == 0) {
