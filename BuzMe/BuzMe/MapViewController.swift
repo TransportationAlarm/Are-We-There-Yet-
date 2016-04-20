@@ -158,7 +158,7 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
     }
     
     @IBAction func onSetAlarm(sender: AnyObject) {
-        let alertController = UIAlertController(title: "Alert", message: "Alarm has been set!", preferredStyle: UIAlertControllerStyle.Alert)
+        let alertController = UIAlertController(title: "Alarm Has Been Set!", message: "We will alert you half a mile from your location", preferredStyle: UIAlertControllerStyle.Alert)
         
 //        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default)
 //        { action -> Void in
@@ -166,7 +166,7 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
 //            })
         self.presentViewController(alertController, animated: true, completion: nil)
         
-        let delay = 1.0 * Double(NSEC_PER_SEC)
+        let delay = 2.0 * Double(NSEC_PER_SEC)
         let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
         dispatch_after(time, dispatch_get_main_queue(), {
             alertController.dismissViewControllerAnimated(true, completion: nil)
