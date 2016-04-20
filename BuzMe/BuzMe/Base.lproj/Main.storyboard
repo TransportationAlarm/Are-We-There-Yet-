@@ -308,8 +308,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jmf-wB-xYK">
                                 <rect key="frame" x="0.0" y="64" width="320" height="31"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Drag marker to desired bus stop, set alarm" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L6I-lB-67f">
-                                        <rect key="frame" x="15" y="7" width="293" height="18"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Press and hold marker, drag to desired stop" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L6I-lB-67f">
+                                        <rect key="frame" x="9" y="7" width="299" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="highlightedColor" white="1" alpha="0.65563038793103445" colorSpace="calibratedWhite"/>
@@ -318,7 +318,7 @@
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="Lgs-hi-nPj"/>
-                                    <constraint firstItem="L6I-lB-67f" firstAttribute="leading" secondItem="jmf-wB-xYK" secondAttribute="leading" constant="15" id="Oef-fH-eAT"/>
+                                    <constraint firstItem="L6I-lB-67f" firstAttribute="leading" secondItem="jmf-wB-xYK" secondAttribute="leading" constant="9" id="Oef-fH-eAT"/>
                                     <constraint firstItem="L6I-lB-67f" firstAttribute="top" secondItem="jmf-wB-xYK" secondAttribute="top" constant="7" id="ary-dW-Hwh"/>
                                     <constraint firstAttribute="trailing" secondItem="L6I-lB-67f" secondAttribute="trailing" constant="12" id="mNj-yN-PGn"/>
                                 </constraints>
