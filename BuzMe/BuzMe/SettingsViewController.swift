@@ -15,6 +15,9 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var vibrateOnRingSwitch: UISwitch!
     @IBOutlet weak var vibrateOnSilentSwitch: UISwitch!
     
+    var vibOnRingOn: Bool!
+    var vibOnSilentOn: Bool!
+    
     @IBOutlet weak var tableView: UITableView!
     
     var selctedRow: Int!
@@ -45,12 +48,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         let soundName = Array(soundsMap!.keys)
         cell.textLabel?.text = soundName[indexPath.row]
         
-        
-        if (indexPath == selctedRow) {
-            cell.accessoryType = .Checkmark
-        } else {
-            cell.accessoryType = .None
-        }
+
         
         return cell
     }
@@ -59,21 +57,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         
         if let cell = tableView.cellForRowAtIndexPath(indexPath) {
             
-            self.selctedRow = indexPath.row
-            
-            if (indexPath == self.selctedRow) {
-                cell.accessoryType = .Checkmark
-            } else {
-                cell.accessoryType = .None
-            }
-            
-//            if cell.accessoryType == .Checkmark {
-//                cell.accessoryType = .None
-//                checked[indexPath.row] = false
-//            } else {
-//                cell.accessoryType = .Checkmark
-//                checked[indexPath.row] = true
-//            }
+        tableView.cellForRowAtIndexPath(indexPath)?.accessoryType = .Checkmark
+
         }
         
         if (indexPath.row == 0) {
@@ -99,16 +84,33 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         }
     
     }
+    
+    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.cellForRowAtIndexPath(indexPath)?.accessoryType = .None
+    }
+    
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    
+        return "Alarm:"
+    
+    
+    }
 
     @IBAction func onVibrateRing(sender: AnyObject) {
         if (vibrateOnRingSwitch.on) {
             AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
+            vibOnRingOn = true
+        } else {
+            vibOnRingOn = false
         }
     }
 
     @IBAction func onVibrateSilent(sender: AnyObject) {
         if (vibrateOnSilentSwitch.on) {
             AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
+            vibOnSilentOn = true
+        } else {
+            vibOnSilentOn = false
         }
     }
     

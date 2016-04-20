@@ -14,6 +14,7 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
     @IBOutlet weak var setAlarmButton: UIButton!
     @IBOutlet weak var googleMapsContainer: UIView!
     @IBOutlet weak var directionsView: UIView!
+    @IBOutlet weak var instructionLabel: UILabel!
     
     let locationManager = CLLocationManager()
     
@@ -46,10 +47,8 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
         }
 
         placesClient = GMSPlacesClient()
-        //getCurrentLocation()
+  
         
-        
-
 
     }
 
@@ -203,11 +202,7 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
     
     @IBAction func onSetAlarm(sender: AnyObject) {
         let alertController = UIAlertController(title: "Alarm Has Been Set!", message: "We will alert you half a mile from your location", preferredStyle: UIAlertControllerStyle.Alert)
-        
-//        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default)
-//        { action -> Void in
-//            // Put your code here
-//            })
+
         self.presentViewController(alertController, animated: true, completion: nil)
         
         let delay = 2.0 * Double(NSEC_PER_SEC)
@@ -230,12 +225,7 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
             if let placeLikelihoodList = placeLikelihoodList {
                 let place = placeLikelihoodList.likelihoods.first?.place
                 if let place = place {
-                    //                    print(place.name)
-                    //                    print(place.formattedAddress)
-                    //                    self.nameLabel.text = place.name
-                    //                    print(place.coordinate)
-                    //                    self.addressLabel.text = place.formattedAddress!.componentsSeparatedByString(", ")
-                    //                        .joinWithSeparator("\n")
+
                     let lat = place.coordinate.latitude
                     let long = place.coordinate.longitude
                     
@@ -246,10 +236,6 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
                     self.view = mapView
 
                     mapView.myLocationEnabled = true
-                    
-//                    let marker = GMSMarker()
-//                    marker.position = CLLocationCoordinate2DMake(lat, long)
-//                    marker.map = mapView
                     
                     mapView.settings.myLocationButton = true
                     mapView.settings.scrollGestures = true
@@ -266,13 +252,13 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
         // Dispose of any resources that can be recreated.
     }
     
-    func getDistanceData() {
-        
-        let apiKey = "AIzaSyA1Zx2qEQi4-1T46wMtnspqnG-cdMxzW14"
-    
-        let url = NSURL(string: "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=\(self.currentLat),\(self.currentLong)&destinations=\(self.destinationLat),\(self.destinationLong)&key=\(apiKey)")
-        
-    }
+//    func getDistanceData() {
+//        
+//        let apiKey = "AIzaSyA1Zx2qEQi4-1T46wMtnspqnG-cdMxzW14"
+//    
+//        let url = NSURL(string: "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=\(self.currentLat),\(self.currentLong)&destinations=\(self.destinationLat),\(self.destinationLong)&key=\(apiKey)")
+//        
+//    }
 
 
     /*
