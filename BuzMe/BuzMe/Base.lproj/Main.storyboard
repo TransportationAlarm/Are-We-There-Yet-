@@ -4,6 +4,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
         <!--Login View Controller-->
@@ -290,13 +291,7 @@
                             <constraint firstItem="IUo-7q-FqM" firstAttribute="leading" secondItem="mzN-Vs-86R" secondAttribute="leading" constant="20" id="tSA-4b-GuN"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="cU3-dQ-zF8">
-                        <barButtonItem key="rightBarButtonItem" title="History" id="L5w-28-7Hy">
-                            <connections>
-                                <segue destination="17z-uJ-M7e" kind="push" id="15L-Xv-gsd"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="cU3-dQ-zF8"/>
                     <connections>
                         <outlet property="tableView" destination="dYt-Jq-NNy" id="ehW-tn-mxb"/>
                         <outlet property="vibrateOnRingSwitch" destination="NhY-8k-8Ga" id="GN5-vb-ogQ"/>
@@ -380,11 +375,18 @@
                                 <segue destination="CpG-ub-5Vh" kind="push" id="jDq-Ld-adH"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="o8s-ih-1da">
-                            <connections>
-                                <action selector="searchWithAddress:" destination="akp-eS-dX1" id="kiA-sE-Ktg"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem title="History" id="L5w-28-7Hy">
+                                <connections>
+                                    <segue destination="17z-uJ-M7e" kind="push" id="15L-Xv-gsd"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="search" id="o8s-ih-1da">
+                                <connections>
+                                    <action selector="searchWithAddress:" destination="akp-eS-dX1" id="kiA-sE-Ktg"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="directionsView" destination="jmf-wB-xYK" id="w2x-97-3uM"/>
