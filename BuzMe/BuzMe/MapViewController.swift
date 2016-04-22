@@ -260,15 +260,6 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
         let url = NSURL(string: urlPath)
         
         
-        
-//        let strOrigin = "\(self.currentLat),\(self.currentLong)"
-//        let strDestination = "\(self.destinationLat),\(self.destinationLong)"
-//        let str = "https://maps.googleapis.com/maps/api/directions/json?origin=\(strOrigin)&destination=\(strDestination)&key=AIzaSyAROhx7BpyklgsThy6g-SpAtZxqnVgHX8I"
-//        let url = NSURL(string: str)
-        
-        //print(url)
-        
-        
         let data = NSData(contentsOfURL: url!)
         
         if let jsonData = data {
@@ -283,62 +274,6 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
             
             print(json)
         }
-    
-        
-//        let urlRequest: NSMutableURLRequest = NSMutableURLRequest(URL: url!)
-//        let session = NSURLSession.sharedSession()
-//        let task = session.dataTaskWithRequest(urlRequest) {
-//            (data, response, error) -> Void in
-//            
-//            let httpResponse = response as! NSHTTPURLResponse
-//            let statusCode = httpResponse.statusCode
-//            
-//            if (statusCode == 200) {
-//                
-//                do{
-//                    
-//                    var json = try NSJSONSerialization.JSONObjectWithData(data!, options:.AllowFragments)
-//                    
-//                    
-//                    let row = json["rows"]!["elements"] as? [String: AnyObject],
-//                    let username = user["name"] as? String {
-//                    // Finally we got the username
-//                    }
-//                    
-//                    //json = JSON(json)
-//                    
-//                    //print(json)
-//                    
-////                    if let rows = json["rows"] as? [[String: AnyObject]] {
-////                        
-////                        if let elements = rows["elements"] as? [[String: AnyObject]] {
-////                            
-////                            print("test")
-////                            
-//////                            if let elements = row["elements"] as? String {
-//////                                
-//////                                print("test")
-//////
-//////                                
-//////                                if let distance = row["distance"] as? String {
-//////                                    NSLog("%@ (Built %@)",elements,distance)
-//////                                }
-//////                                
-//////                            }
-////                        }
-////                        
-////                    }
-//                    
-//                }catch {
-//                    print("Error with Json: \(error)")
-//                    
-//                }
-//                
-//            }
-//            
-//        }
-//        
-//        task.resume()
         
         
     }
