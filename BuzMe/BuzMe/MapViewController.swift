@@ -8,6 +8,7 @@
 
 import UIKit
 import GoogleMaps
+import SwiftyJSON
 
 class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, GMSMapViewDelegate, CLLocationManagerDelegate {
     
@@ -21,7 +22,7 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
     var marker: GMSMarker!
     
     var destinationLat: Double!
-    var destiinationLong: Double!
+    var destinationLong: Double!
     var currentLat: Double!
     var currentLong: Double!
     
@@ -71,11 +72,7 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
         // draw route
         // let strHome = SRKUtility.addURLEncoding("Banana Republic, Grant Avenue, San Francisco, CA")
         // let strOffice = SRKUtility.addURLEncoding("Union Square, San Francisco, CA")
-//        let strOrigin = "37.7905153,-122.4099926"
-//        let strDestination = "37.7890994,-122.4100355"
-//        let str = "https://maps.googleapis.com/maps/api/directions/json?origin=\(strOrigin)&destination=\(strDestination)&key=AIzaSyAROhx7BpyklgsThy6g-SpAtZxqnVgHX8I"
-//        print(str)
-//
+
 //        SRKUtility.invokeRequestForJSON(NSMutableURLRequest(URL: NSURL(string: str)!)) { (obj:AnyObject?, error:NSString?) -> Void in
 //            if let r = error {
 //                print("Error occured \(r)")
@@ -152,7 +149,9 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
         print(marker.position.latitude)
         
         destinationLat = coordinate.latitude
-        destiinationLong = coordinate.longitude
+        destinationLong = coordinate.longitude
+        
+        getDistanceData()
         
     }
     
@@ -252,13 +251,95 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
         // Dispose of any resources that can be recreated.
     }
     
-//    func getDistanceData() {
+    func getDistanceData() {
+        
+        let apiKey = "AIzaSyAROhx7BpyklgsThy6g-SpAtZxqnVgHX8I"
+        
+        let urlPath = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=\(self.currentLat),\(self.currentLong)&destinations=\(self.destinationLat),\(self.destinationLong)&key=\(apiKey)"
+    
+        let url = NSURL(string: urlPath)
+        
+        
+        
+//        let strOrigin = "\(self.currentLat),\(self.currentLong)"
+//        let strDestination = "\(self.destinationLat),\(self.destinationLong)"
+//        let str = "https://maps.googleapis.com/maps/api/directions/json?origin=\(strOrigin)&destination=\(strDestination)&key=AIzaSyAROhx7BpyklgsThy6g-SpAtZxqnVgHX8I"
+//        let url = NSURL(string: str)
+        
+        //print(url)
+        
+        
+        let data = NSData(contentsOfURL: url!)
+        
+        if let jsonData = data {s
+            print ("yay!!!!!")
+            let json = JSON(data: jsonData)
+            
+            if let distance = json["origin_addresses"].string {
+                print("distance \(distance)")
+            }
+            
+            print(json)
+        }
+    
+        
+//        let urlRequest: NSMutableURLRequest = NSMutableURLRequest(URL: url!)
+//        let session = NSURLSession.sharedSession()
+//        let task = session.dataTaskWithRequest(urlRequest) {
+//            (data, response, error) -> Void in
+//            
+//            let httpResponse = response as! NSHTTPURLResponse
+//            let statusCode = httpResponse.statusCode
+//            
+//            if (statusCode == 200) {
+//                
+//                do{
+//                    
+//                    var json = try NSJSONSerialization.JSONObjectWithData(data!, options:.AllowFragments)
+//                    
+//                    
+//                    let row = json["rows"]!["elements"] as? [String: AnyObject],
+//                    let username = user["name"] as? String {
+//                    // Finally we got the username
+//                    }
+//                    
+//                    //json = JSON(json)
+//                    
+//                    //print(json)
+//                    
+////                    if let rows = json["rows"] as? [[String: AnyObject]] {
+////                        
+////                        if let elements = rows["elements"] as? [[String: AnyObject]] {
+////                            
+////                            print("test")
+////                            
+//////                            if let elements = row["elements"] as? String {
+//////                                
+//////                                print("test")
+//////
+//////                                
+//////                                if let distance = row["distance"] as? String {
+//////                                    NSLog("%@ (Built %@)",elements,distance)
+//////                                }
+//////                                
+//////                            }
+////                        }
+////                        
+////                    }
+//                    
+//                }catch {
+//                    print("Error with Json: \(error)")
+//                    
+//                }
+//                
+//            }
+//            
+//        }
 //        
-//        let apiKey = "AIzaSyA1Zx2qEQi4-1T46wMtnspqnG-cdMxzW14"
-//    
-//        let url = NSURL(string: "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=\(self.currentLat),\(self.currentLong)&destinations=\(self.destinationLat),\(self.destinationLong)&key=\(apiKey)")
-//        
-//    }
+//        task.resume()
+        
+        
+    }
 
 
     /*

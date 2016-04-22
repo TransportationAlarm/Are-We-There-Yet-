@@ -8,6 +8,7 @@ target 'BuzMe' do
     pod 'Parse'
     pod 'GoogleMaps'
     pod 'SDCAlertView', '~> 5.0'
+    pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
 
 end
 

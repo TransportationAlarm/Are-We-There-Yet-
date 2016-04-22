@@ -87,9 +87,11 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-BuzMe/Bolts.framework"
   install_framework "Pods-BuzMe/Parse.framework"
   install_framework "Pods-BuzMe/SDCAlertView.framework"
+  install_framework "Pods-BuzMe/SwiftyJSON.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-BuzMe/Bolts.framework"
   install_framework "Pods-BuzMe/Parse.framework"
   install_framework "Pods-BuzMe/SDCAlertView.framework"
+  install_framework "Pods-BuzMe/SwiftyJSON.framework"
 fi

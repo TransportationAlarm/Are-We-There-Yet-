@@ -4,16 +4,28 @@ PODS:
   - Parse (1.13.0):
     - Bolts/Tasks (~> 1.6)
   - SDCAlertView (5.0)
+  - SwiftyJSON (2.3.2)
 
 DEPENDENCIES:
   - GoogleMaps
   - Parse
   - SDCAlertView (~> 5.0)
+  - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`)
+
+EXTERNAL SOURCES:
+  SwiftyJSON:
+    :git: https://github.com/SwiftyJSON/SwiftyJSON.git
+
+CHECKOUT OPTIONS:
+  SwiftyJSON:
+    :commit: 2a5b70f06001316d4fb54501edc70b4084705da0
+    :git: https://github.com/SwiftyJSON/SwiftyJSON.git
 
 SPEC CHECKSUMS:
   Bolts: f52a250053bb517ca874523c3913776359ab3def
   GoogleMaps: da51c62c338c2d9c47cdad470a0d1e0e4b8544e4
   Parse: f51c24d2feb412e4b2d6cc73d37cb24e8d0089bc
   SDCAlertView: e552dd803a1ea47ffda9f718b046e307cfd6b82a
+  SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
 COCOAPODS: 0.39.0
