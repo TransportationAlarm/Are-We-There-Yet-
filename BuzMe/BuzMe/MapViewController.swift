@@ -271,12 +271,14 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
         
         let data = NSData(contentsOfURL: url!)
         
-        if let jsonData = data {s
+        if let jsonData = data {
             print ("yay!!!!!")
             let json = JSON(data: jsonData)
             
-            if let distance = json["origin_addresses"].string {
-                print("distance \(distance)")
+            //let distance:JSON = json["rows"][0]["elements"][0]["distance"]["text"]
+            
+            if let distance:JSON = json["rows"][0]["elements"][0]["distance"]["text"] {
+                print(distance)
             }
             
             print(json)
