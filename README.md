@@ -32,7 +32,7 @@ The following **required** functionality is completed:
 The following **optional** features are implemented:
 
 - [ ] Change the time that the alarm alerts the user 
-- [ ] Keep track of history of users trips
+- [x] Keep track of history of users trips
 
 
 The following **additional** features are implemented:
@@ -58,6 +58,12 @@ Here's a walkthrough of implemented user stories for the second week:
 Here's a walkthrough of implemented user stories for the third week:
 
 <img src='http://imgur.com/cMnIkZB.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
+GIF created with [LiceCap](http://www.cockos.com/licecap/).
+
+Here's a walkthrough of implemented user stories for the fourth week:
+
+<img src='http://imgur.com/D4H4pIK.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
