@@ -8,10 +8,19 @@
 
 import UIKit
 
-class HistoryViewController: UIViewController {
+class HistoryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
+    @IBOutlet weak var tableView: UITableView!
+    
+    var passedDistance: String!
+    var passedDestination: String!
+    var passedOrigin: String!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.delegate = self
+        tableView.dataSource = self
 
         // Do any additional setup after loading the view.
     }
@@ -20,15 +29,21 @@ class HistoryViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-//    
-//    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return 0
-//    }
     
-//    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-//        
-//        return cell
-//    }
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCellWithIdentifier("HistoryTableViewCell", forIndexPath: indexPath) as! HistoryTableViewCell
+        
+        cell.startLabel.text = self.passedOrigin
+        cell.destinationLabel.text = self.passedDestination
+        cell.distanceLabel.text = self.passedDistance
+        
+        return cell
+    }
     
 
     /*

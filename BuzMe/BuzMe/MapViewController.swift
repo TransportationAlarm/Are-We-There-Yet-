@@ -21,6 +21,11 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
     
     var marker: GMSMarker!
     
+    var retrievedDistacne: JSON!
+    var retrievedDestinationAddress: JSON!
+    var retrievedOriginAddress: JSON!
+    var alarmPressed: Bool!
+    
     var destinationLat: Double!
     var destinationLong: Double!
     var currentLat: Double!
@@ -259,15 +264,13 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
     
         let url = NSURL(string: urlPath)
         
-        
         let data = NSData(contentsOfURL: url!)
         
         if let jsonData = data {
             let json = JSON(data: jsonData)
             
-            //let distance:JSON = json["rows"][0]["elements"][0]["distance"]["text"]
-            
             if let distanceStr:JSON = json["rows"][0]["elements"][0]["distance"]["text"] {
+               self.retrievedDistacne = distanceStr
                 print(distanceStr)
             }
             
@@ -279,10 +282,12 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
             }
             
             if let destinationAddress:JSON = json["destination_addresses"][0] {
+                self.retrievedDestinationAddress = destinationAddress
                 print(destinationAddress)
             }
             
             if let originAddress:JSON = json["origin_addresses"][0] {
+                self.retrievedOriginAddress = originAddress
                 print(originAddress)
             }
             
@@ -293,14 +298,17 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
     }
 
 
-    /*
-    // MARK: - Navigation
-
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
+        let destinationVC:HistoryViewController = segue.destinationViewController as! HistoryViewController
+
         // Pass the selected object to the new view controller.
+        destinationVC.passedOrigin = "Start: \(self.retrievedOriginAddress)"
+        destinationVC.passedDestination = "Destination: \(self.retrievedDestinationAddress)"
+        destinationVC.passedDistance = "Distance: \(self.retrievedDistacne)"
+
     }
-    */
+ 
 
 }
