@@ -110,7 +110,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
             vibOnSilentOn = true
         } else {
-            vibOnSilentOn = false
+            //vibOnSilentOn = false
         }
     }
     
