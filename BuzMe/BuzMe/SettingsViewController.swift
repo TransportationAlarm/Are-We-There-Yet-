@@ -51,12 +51,13 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         cell.textLabel?.text = soundName[indexPath.row]
         
         
-        if checkMarkToDisplay == indexPath.row {
+        /*if checkMarkToDisplay == indexPath.row {
             cell.accessoryType = .Checkmark
         }
         else{
             cell.accessoryType = .None
         }
+        */
     
         return cell
     }

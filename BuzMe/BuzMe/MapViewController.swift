@@ -166,7 +166,7 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
         destinationLat = coordinate.latitude
         destinationLong = coordinate.longitude
         
-        getDistanceData()
+        //getDistanceData()
         
     }
     
@@ -227,6 +227,8 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
         
         timer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: #selector(MapViewController.checkDistanceForTimer), userInfo: nil, repeats: true)
         
+        getDistanceData()
+        
     }
     
     func getCurrentLocation() {
@@ -283,7 +285,7 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
             if let distanceStr:JSON = json["rows"][0]["elements"][0]["distance"]["text"] {
                self.retrievedDistance = "\(distanceStr)"
                 print(retrievedDistance)
-                distanceArray.append(self.retrievedDistance)
+                distanceArray.insert(self.retrievedDistance, atIndex: 0)
                 print(distanceStr)
             }
             
@@ -297,13 +299,13 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
             
             if let destinationAddress:JSON = json["destination_addresses"][0] {
                 self.retrievedDestinationAddress = "\(destinationAddress)"
-                destinationArray.append(retrievedDestinationAddress)
+                destinationArray.insert(self.retrievedDestinationAddress, atIndex: 0)
                 print(destinationAddress)
             }
             
             if let originAddress:JSON = json["origin_addresses"][0] {
                 self.retrievedOriginAddress = "\(originAddress)"
-                originArray.append(retrievedOriginAddress)
+                originArray.insert(self.retrievedOriginAddress, atIndex: 0)
                 print(originAddress)
             }
             

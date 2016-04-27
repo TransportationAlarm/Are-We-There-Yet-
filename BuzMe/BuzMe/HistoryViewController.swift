@@ -25,10 +25,10 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
         tableView.delegate = self
         tableView.dataSource = self
+        
+        tableView.backgroundColor = UIColor.darkGrayColor()
         
         historyInformation()
         //tableView.estimatedRowHeight = 600
@@ -47,8 +47,6 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         print(passedDistanceArray)
         print(passedDestinationArray)
         print(passedOriginArray)
-
-        
         
     }
     
