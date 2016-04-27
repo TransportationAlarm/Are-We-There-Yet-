@@ -67,6 +67,10 @@ Here's a walkthrough of implemented user stories for the fourth week:
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
+<img src='http://imgur.com/Hy2i2hm.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
+GIF created with [LiceCap](http://www.cockos.com/licecap/).
+
 
 ## Notes
 
