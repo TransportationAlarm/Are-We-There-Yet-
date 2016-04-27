@@ -9,6 +9,8 @@
 import UIKit
 import GoogleMaps
 import SwiftyJSON
+import AudioToolbox.AudioServices
+
 
 class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, GMSMapViewDelegate, CLLocationManagerDelegate {
     
@@ -214,6 +216,7 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
         dispatch_after(time, dispatch_get_main_queue(), {
             alertController.dismissViewControllerAnimated(true, completion: nil)
         })
+        
 
         
     }
@@ -278,6 +281,7 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
                 print(distanceM)
                 if (distanceM < 800) { // if distance is less than 0.5 miles
                     // vibrate phone
+                    AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
                 }
             }
             
