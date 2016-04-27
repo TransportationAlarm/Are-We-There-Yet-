@@ -23,6 +23,7 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
     
     let locationManager = CLLocationManager()
     var timer = NSTimer()
+    var vibratingTimer = NSTimer()
     
     var marker: GMSMarker!
     
@@ -224,7 +225,7 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
             alertController.dismissViewControllerAnimated(true, completion: nil)
         })
         
-        timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(MapViewController.checkDistanceForTimer), userInfo: nil, repeats: true)
+        timer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: #selector(MapViewController.checkDistanceForTimer), userInfo: nil, repeats: true)
         
     }
     
@@ -332,7 +333,8 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
                 print(distanceM)
                 if (distanceM < 800) { // if distance is less than 0.5 miles
                     // vibrate phone
-                    AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
+                    vibratingTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(MapViewController.vibrateAtDestination), userInfo: nil, repeats: true)
+
 
                     print("counting..")
                     
@@ -340,6 +342,7 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
                     
                     alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction!) in
                         self.timer.invalidate()
+                        self.vibratingTimer.invalidate()
                     }))
                     
                     presentViewController(alertController, animated: true, completion: nil)
@@ -350,6 +353,10 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
     
     
     
+    }
+    
+    func vibrateAtDestination() {
+        AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
     }
     
 
