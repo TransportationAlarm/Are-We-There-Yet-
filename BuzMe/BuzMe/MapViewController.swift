@@ -19,7 +19,10 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
     @IBOutlet weak var directionsView: UIView!
     @IBOutlet weak var instructionLabel: UILabel!
     
-    var timer = NSTimer.scheduledTimerWithTimeInterval(10.0, target: MapViewController(), selector: Selector(), userInfo: nil, repeats: true)
+    func updateCounting(){
+        NSLog("counting..")
+    }
+
 
     
     let locationManager = CLLocationManager()
@@ -58,7 +61,6 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
         }
 
         placesClient = GMSPlacesClient()
-  
         
 
     }
@@ -220,7 +222,7 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
             alertController.dismissViewControllerAnimated(true, completion: nil)
         })
         
-
+        let timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(checkDistanceForTimer()), userInfo: nil, repeats: true)
         
     }
     
