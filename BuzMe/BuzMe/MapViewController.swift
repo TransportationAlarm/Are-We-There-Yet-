@@ -17,6 +17,9 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
     @IBOutlet weak var directionsView: UIView!
     @IBOutlet weak var instructionLabel: UILabel!
     
+    var timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: Selector(""), userInfo: nil, repeats: true)
+
+    
     let locationManager = CLLocationManager()
     
     var marker: GMSMarker!
@@ -301,12 +304,15 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
-        let destinationVC:HistoryViewController = segue.destinationViewController as! HistoryViewController
+        
+        if (segue.identifier == "HistoryPage") {
+            let destinationVC:HistoryViewController = segue.destinationViewController as! HistoryViewController
 
-        // Pass the selected object to the new view controller.
-        destinationVC.passedOrigin = "Start: \(self.retrievedOriginAddress)"
-        destinationVC.passedDestination = "Destination: \(self.retrievedDestinationAddress)"
-        destinationVC.passedDistance = "Distance: \(self.retrievedDistacne)"
+            // Pass the selected object to the new view controller.
+            destinationVC.passedOrigin = "Start: \(self.retrievedOriginAddress)"
+            destinationVC.passedDestination = "Destination: \(self.retrievedDestinationAddress)"
+            destinationVC.passedDistance = "Distance: \(self.retrievedDistacne)"
+        }
 
     }
  

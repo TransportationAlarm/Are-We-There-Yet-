@@ -385,7 +385,7 @@
                         <rightBarButtonItems>
                             <barButtonItem title="History" id="L5w-28-7Hy">
                                 <connections>
-                                    <segue destination="17z-uJ-M7e" kind="push" id="15L-Xv-gsd"/>
+                                    <segue destination="17z-uJ-M7e" kind="push" identifier="HistoryPage" id="15L-Xv-gsd"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem systemItem="search" id="o8s-ih-1da">
