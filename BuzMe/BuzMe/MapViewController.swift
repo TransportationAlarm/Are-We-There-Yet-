@@ -330,7 +330,7 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
                     
                     var alertController = UIAlertController(title: "Alert", message: "You have almost reached your destination", preferredStyle: UIAlertControllerStyle.Alert)
                     
-                    alertController.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { (action: UIAlertAction!) in
+                    alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction!) in
                         self.timer.invalidate()
                     }))
                     
