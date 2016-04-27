@@ -26,10 +26,14 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
     
     var marker: GMSMarker!
     
-    var retrievedDistacne: JSON!
-    var retrievedDestinationAddress: JSON!
-    var retrievedOriginAddress: JSON!
+    var retrievedDistance: String!
+    var retrievedDestinationAddress: String!
+    var retrievedOriginAddress: String!
     var alarmPressed: Bool!
+    
+    var distanceArray = [String]()
+    var destinationArray = [String]()
+    var originArray = [String]()
     
     var destinationLat: Double!
     var destinationLong: Double!
@@ -276,7 +280,9 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
             let json = JSON(data: jsonData)
             
             if let distanceStr:JSON = json["rows"][0]["elements"][0]["distance"]["text"] {
-               self.retrievedDistacne = distanceStr
+               self.retrievedDistance = "\(distanceStr)"
+                print(retrievedDistance)
+                distanceArray.append(self.retrievedDistance)
                 print(distanceStr)
             }
             
@@ -289,12 +295,14 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
             }
             
             if let destinationAddress:JSON = json["destination_addresses"][0] {
-                self.retrievedDestinationAddress = destinationAddress
+                self.retrievedDestinationAddress = "\(destinationAddress)"
+                destinationArray.append(retrievedDestinationAddress)
                 print(destinationAddress)
             }
             
             if let originAddress:JSON = json["origin_addresses"][0] {
-                self.retrievedOriginAddress = originAddress
+                self.retrievedOriginAddress = "\(originAddress)"
+                originArray.append(retrievedOriginAddress)
                 print(originAddress)
             }
             
@@ -352,13 +360,16 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
         
         if (segue.identifier == "HistoryPage") {
             let destinationVC:HistoryViewController = segue.destinationViewController as! HistoryViewController
-
             // Pass the selected object to the new view controller.
             destinationVC.passedOrigin = "Start: \(self.retrievedOriginAddress)"
             destinationVC.passedDestination = "Destination: \(self.retrievedDestinationAddress)"
-            destinationVC.passedDistance = "Distance: \(self.retrievedDistacne)"
-        }
+            destinationVC.passedDistance = "Distance: \(self.retrievedDistance)"
+            destinationVC.passedDestinationArray = destinationArray
+            destinationVC.passedOriginArray = originArray
+            destinationVC.passedDistanceArray = distanceArray
 
+
+        }
     }
  
 

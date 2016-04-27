@@ -15,14 +15,22 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
     var passedDistance: String!
     var passedDestination: String!
     var passedOrigin: String!
+    
+    var passedDistanceArray: [String]?
+    var passedDestinationArray: [String]?
+    var passedOriginArray: [String]?
+    
+    var historyInfo = [String: [String]]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.delegate = self
         tableView.dataSource = self
-//        tableView.estimatedRowHeight = 1000
-//        tableView.rowHeight = UITableViewAutomaticDimension
+        
+        historyInformation()
+        //tableView.estimatedRowHeight = 600
+        //tableView.rowHeight = UITableViewAutomaticDimension
 
         // Do any additional setup after loading the view.
     }
@@ -32,19 +40,33 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         // Dispose of any resources that can be recreated.
     }
     
+    func historyInformation() {
+        
+        print(passedDistanceArray)
+        print(passedDestinationArray)
+        print(passedOriginArray)
+        
+        print(passedDistance)
+        print(passedDestination)
+        
+        
+    }
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        if let passedDestinationArray = passedDestinationArray {
+            return passedDestinationArray.count
+        } else {
+            return 0
+        }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("HistoryTableViewCell", forIndexPath: indexPath) as! HistoryTableViewCell
-        
-        
-        
-        cell.startLabel.text = self.passedOrigin
-        cell.destinationLabel.text = self.passedDestination
-        cell.distanceLabel.text = self.passedDistance
+
+        cell.startLabel.text = self.passedOriginArray![indexPath.item]
+        cell.destinationLabel.text = self.passedDestinationArray![indexPath.item]
+        cell.distanceLabel.text = self.passedDistanceArray![indexPath.item]
         
         return cell
     }
