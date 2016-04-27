@@ -31,7 +31,7 @@ The following **required** functionality is completed:
 
 The following **optional** features are implemented:
 
-- [ ] Change the time that the alarm alerts the user 
+- [x] Keep track of many user trips 
 - [x] Keep track of history of users trips
 
 
