@@ -9,6 +9,8 @@
 import UIKit
 import GoogleMaps
 import SwiftyJSON
+import AudioToolbox
+import AVFoundation
 
 class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, GMSMapViewDelegate, CLLocationManagerDelegate {
     
@@ -17,7 +19,10 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
     @IBOutlet weak var directionsView: UIView!
     @IBOutlet weak var instructionLabel: UILabel!
     
+
+    
     let locationManager = CLLocationManager()
+    var timer = NSTimer()
     
     var marker: GMSMarker!
     
@@ -57,7 +62,6 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
         }
 
         placesClient = GMSPlacesClient()
-  
         
 
     }
@@ -75,6 +79,7 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
         googleMapsView.settings.myLocationButton = true
         
         googleMapsView.delegate = self
+        
         
         //getCurrentLocation()
         
@@ -218,7 +223,8 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
         dispatch_after(time, dispatch_get_main_queue(), {
             alertController.dismissViewControllerAnimated(true, completion: nil)
         })
-
+        
+        timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(MapViewController.checkDistanceForTimer), userInfo: nil, repeats: true)
         
     }
     
@@ -284,6 +290,7 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
                 print(distanceM)
                 if (distanceM < 800) { // if distance is less than 0.5 miles
                     // vibrate phone
+                    AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
                 }
             }
             
@@ -304,21 +311,68 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
         
         
     }
+    
+    func checkDistanceForTimer() {
+        
+        let apiKey = "AIzaSyAROhx7BpyklgsThy6g-SpAtZxqnVgHX8I"
+        
+        let urlPath = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=\(self.currentLat),\(self.currentLong)&destinations=\(self.destinationLat),\(self.destinationLong)&key=\(apiKey)"
+        
+        let url = NSURL(string: urlPath)
+        
+        let data = NSData(contentsOfURL: url!)
+        
+        if let jsonData = data {
+            
+            let json = JSON(data: jsonData)
+            
+            print(json)
+            
+            if let distanceM:JSON = json["rows"][0]["elements"][0]["distance"]["value"] {
+                print(distanceM)
+                if (distanceM < 800) { // if distance is less than 0.5 miles
+                    // vibrate phone
+                    AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
+
+                    print("counting..")
+                    
+                    let alertController = UIAlertController(title: "Alert", message: "You have almost reached your destination", preferredStyle: UIAlertControllerStyle.Alert)
+                    
+                    self.presentViewController(alertController, animated: true, completion: nil)
+                    
+                    let delay = 2.0 * Double(NSEC_PER_SEC)
+                    let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+                    dispatch_after(time, dispatch_get_main_queue(), {
+                        alertController.dismissViewControllerAnimated(true, completion: nil)
+                        self.timer.invalidate()
+                    })
+                    
+                }
+            }
+        }
+    
+    
+    
+    }
+    
 
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
-        let destinationVC:HistoryViewController = segue.destinationViewController as! HistoryViewController
+        
+        if (segue.identifier == "HistoryPage") {
+            let destinationVC:HistoryViewController = segue.destinationViewController as! HistoryViewController
+            // Pass the selected object to the new view controller.
+            destinationVC.passedOrigin = "Start: \(self.retrievedOriginAddress)"
+            destinationVC.passedDestination = "Destination: \(self.retrievedDestinationAddress)"
+            destinationVC.passedDistance = "Distance: \(self.retrievedDistance)"
+            destinationVC.passedDestinationArray = destinationArray
+            destinationVC.passedOriginArray = originArray
+            destinationVC.passedDistanceArray = distanceArray
 
-        // Pass the selected object to the new view controller.
-        destinationVC.passedOrigin = "Start: \(self.retrievedOriginAddress)"
-        destinationVC.passedDestination = "Destination: \(self.retrievedDestinationAddress)"
-        destinationVC.passedDistance = "Distance: \(self.retrievedDistance)"
-        destinationVC.passedDestinationArray = destinationArray
-        destinationVC.passedOriginArray = originArray
-        destinationVC.passedDistanceArray = distanceArray
 
+        }
     }
  
 

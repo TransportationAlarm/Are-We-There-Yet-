@@ -15,6 +15,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var vibrateOnRingSwitch: UISwitch!
     @IBOutlet weak var vibrateOnSilentSwitch: UISwitch!
     
+    var lastSelectedRow: NSIndexPath!
+    
     var vibOnRingOn: Bool!
     var vibOnSilentOn: Bool!
     
@@ -29,7 +31,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.tableView.dataSource = self
         self.tableView.delegate = self
     }
@@ -48,8 +50,15 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         let soundName = Array(soundsMap!.keys)
         cell.textLabel?.text = soundName[indexPath.row]
         
-
+        let checkMarkToDisplay  =   NSUserDefaults.standardUserDefaults().valueForKey("lastSelectedRow") as! Int
         
+        if checkMarkToDisplay == indexPath.row {
+            cell.accessoryType = .Checkmark
+        }
+        else{
+            cell.accessoryType = .None
+        }
+    
         return cell
     }
     
@@ -110,7 +119,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
             vibOnSilentOn = true
         } else {
-            //vibOnSilentOn = false
+            vibOnSilentOn = false
         }
     }
     
