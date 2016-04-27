@@ -328,16 +328,13 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
 
                     print("counting..")
                     
-                    let alertController = UIAlertController(title: "Alert", message: "You have almost reached your destination", preferredStyle: UIAlertControllerStyle.Alert)
+                    var alertController = UIAlertController(title: "Alert", message: "You have almost reached your destination", preferredStyle: UIAlertControllerStyle.Alert)
                     
-                    self.presentViewController(alertController, animated: true, completion: nil)
-                    
-                    let delay = 2.0 * Double(NSEC_PER_SEC)
-                    let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
-                    dispatch_after(time, dispatch_get_main_queue(), {
-                        alertController.dismissViewControllerAnimated(true, completion: nil)
+                    alertController.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { (action: UIAlertAction!) in
                         self.timer.invalidate()
-                    })
+                    }))
+                    
+                    presentViewController(alertController, animated: true, completion: nil)
                     
                 }
             }
