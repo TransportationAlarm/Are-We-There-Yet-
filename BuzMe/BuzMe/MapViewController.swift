@@ -9,8 +9,8 @@
 import UIKit
 import GoogleMaps
 import SwiftyJSON
-import AudioToolbox.AudioServices
-
+import AudioToolbox
+import AVFoundation
 
 class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, GMSMapViewDelegate, CLLocationManagerDelegate {
     
@@ -18,6 +18,9 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
     @IBOutlet weak var googleMapsContainer: UIView!
     @IBOutlet weak var directionsView: UIView!
     @IBOutlet weak var instructionLabel: UILabel!
+    
+    var timer = NSTimer.scheduledTimerWithTimeInterval(10.0, target: MapViewController(), selector: Selector(), userInfo: nil, repeats: true)
+
     
     let locationManager = CLLocationManager()
     
@@ -300,17 +303,54 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
         
         
     }
+    
+    func checkDistanceForTimer() {
+        
+        let apiKey = "AIzaSyAROhx7BpyklgsThy6g-SpAtZxqnVgHX8I"
+        
+        let urlPath = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=\(self.currentLat),\(self.currentLong)&destinations=\(self.destinationLat),\(self.destinationLong)&key=\(apiKey)"
+        
+        let url = NSURL(string: urlPath)
+        
+        let data = NSData(contentsOfURL: url!)
+        
+        if let jsonData = data {
+            
+            let json = JSON(data: jsonData)
+            
+            if let distanceM:JSON = json["rows"][0]["elements"][0]["distance"]["value"] {
+                print(distanceM)
+                if (distanceM < 800) { // if distance is less than 0.5 miles
+                    // vibrate phone
+                    
+                    AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
+
+                    
+                    
+                    
+                    
+                }
+            }
+        }
+    
+    
+    
+    }
+    
 
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
-        let destinationVC:HistoryViewController = segue.destinationViewController as! HistoryViewController
+        
+        if (segue.identifier == "HistoryPage") {
+            let destinationVC:HistoryViewController = segue.destinationViewController as! HistoryViewController
 
-        // Pass the selected object to the new view controller.
-        destinationVC.passedOrigin = "Start: \(self.retrievedOriginAddress)"
-        destinationVC.passedDestination = "Destination: \(self.retrievedDestinationAddress)"
-        destinationVC.passedDistance = "Distance: \(self.retrievedDistacne)"
+            // Pass the selected object to the new view controller.
+            destinationVC.passedOrigin = "Start: \(self.retrievedOriginAddress)"
+            destinationVC.passedDestination = "Destination: \(self.retrievedDestinationAddress)"
+            destinationVC.passedDistance = "Distance: \(self.retrievedDistacne)"
+        }
 
     }
  
