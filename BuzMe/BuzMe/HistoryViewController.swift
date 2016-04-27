@@ -25,6 +25,8 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -45,9 +47,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         print(passedDistanceArray)
         print(passedDestinationArray)
         print(passedOriginArray)
-        
-        print(passedDistance)
-        print(passedDestination)
+
         
         
     }
@@ -67,6 +67,8 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         cell.startLabel.text = self.passedOriginArray![indexPath.item]
         cell.destinationLabel.text = self.passedDestinationArray![indexPath.item]
         cell.distanceLabel.text = self.passedDistanceArray![indexPath.item]
+        
+        cell.backgroundColor = UIColor.darkGrayColor()
         
         return cell
     }

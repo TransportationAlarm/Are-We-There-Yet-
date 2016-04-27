@@ -50,7 +50,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         let soundName = Array(soundsMap!.keys)
         cell.textLabel?.text = soundName[indexPath.row]
         
-        let checkMarkToDisplay  =   NSUserDefaults.standardUserDefaults().valueForKey("lastSelectedRow") as! Int
         
         if checkMarkToDisplay == indexPath.row {
             cell.accessoryType = .Checkmark

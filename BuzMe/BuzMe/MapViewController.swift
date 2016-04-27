@@ -364,9 +364,6 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
         if (segue.identifier == "HistoryPage") {
             let destinationVC:HistoryViewController = segue.destinationViewController as! HistoryViewController
             // Pass the selected object to the new view controller.
-            destinationVC.passedOrigin = "Start: \(self.retrievedOriginAddress)"
-            destinationVC.passedDestination = "Destination: \(self.retrievedDestinationAddress)"
-            destinationVC.passedDistance = "Distance: \(self.retrievedDistance)"
             destinationVC.passedDestinationArray = destinationArray
             destinationVC.passedOriginArray = originArray
             destinationVC.passedDistanceArray = distanceArray
