@@ -17,6 +17,10 @@ class HistoryTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        startLabel.preferredMaxLayoutWidth = startLabel.frame.size.width
+        distanceLabel.preferredMaxLayoutWidth = distanceLabel.frame.size.width
+        destinationLabel.preferredMaxLayoutWidth = destinationLabel.frame.size.width
+        
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
