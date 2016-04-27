@@ -9,6 +9,8 @@
 import UIKit
 import GoogleMaps
 import SwiftyJSON
+import AudioToolbox
+import AVFoundation
 
 class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, GMSMapViewDelegate, CLLocationManagerDelegate {
     
@@ -17,7 +19,7 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
     @IBOutlet weak var directionsView: UIView!
     @IBOutlet weak var instructionLabel: UILabel!
     
-    var timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: Selector(""), userInfo: nil, repeats: true)
+    var timer = NSTimer.scheduledTimerWithTimeInterval(10.0, target: MapViewController(), selector: Selector(), userInfo: nil, repeats: true)
 
     
     let locationManager = CLLocationManager()
@@ -299,6 +301,40 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
         
         
     }
+    
+    func checkDistanceForTimer() {
+        
+        let apiKey = "AIzaSyAROhx7BpyklgsThy6g-SpAtZxqnVgHX8I"
+        
+        let urlPath = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=\(self.currentLat),\(self.currentLong)&destinations=\(self.destinationLat),\(self.destinationLong)&key=\(apiKey)"
+        
+        let url = NSURL(string: urlPath)
+        
+        let data = NSData(contentsOfURL: url!)
+        
+        if let jsonData = data {
+            
+            let json = JSON(data: jsonData)
+            
+            if let distanceM:JSON = json["rows"][0]["elements"][0]["distance"]["value"] {
+                print(distanceM)
+                if (distanceM < 800) { // if distance is less than 0.5 miles
+                    // vibrate phone
+                    
+                    AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
+
+                    
+                    
+                    
+                    
+                }
+            }
+        }
+    
+    
+    
+    }
+    
 
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
