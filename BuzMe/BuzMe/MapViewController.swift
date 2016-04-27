@@ -19,10 +19,6 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
     @IBOutlet weak var directionsView: UIView!
     @IBOutlet weak var instructionLabel: UILabel!
     
-    func updateCounting(){
-        NSLog("counting..")
-    }
-
 
     
     let locationManager = CLLocationManager()
@@ -222,7 +218,7 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
             alertController.dismissViewControllerAnimated(true, completion: nil)
         })
         
-        let timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(checkDistanceForTimer()), userInfo: nil, repeats: true)
+        let timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(MapViewController.checkDistanceForTimer), userInfo: nil, repeats: true)
         
     }
     
@@ -320,16 +316,15 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
             
             let json = JSON(data: jsonData)
             
+            print(json)
+            
             if let distanceM:JSON = json["rows"][0]["elements"][0]["distance"]["value"] {
                 print(distanceM)
                 if (distanceM < 800) { // if distance is less than 0.5 miles
                     // vibrate phone
-                    
                     AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
 
-                    
-                    
-                    
+                    print("counting..")
                     
                 }
             }
