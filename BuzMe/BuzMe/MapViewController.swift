@@ -22,6 +22,7 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
 
     
     let locationManager = CLLocationManager()
+    var timer = NSTimer()
     
     var marker: GMSMarker!
     
@@ -74,6 +75,7 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
         googleMapsView.settings.myLocationButton = true
         
         googleMapsView.delegate = self
+        
         
         //getCurrentLocation()
         
@@ -218,7 +220,7 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
             alertController.dismissViewControllerAnimated(true, completion: nil)
         })
         
-        let timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(MapViewController.checkDistanceForTimer), userInfo: nil, repeats: true)
+        timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(MapViewController.checkDistanceForTimer), userInfo: nil, repeats: true)
         
     }
     
@@ -325,6 +327,17 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
                     AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
 
                     print("counting..")
+                    
+                    let alertController = UIAlertController(title: "Alert", message: "You have almost reached your destination", preferredStyle: UIAlertControllerStyle.Alert)
+                    
+                    self.presentViewController(alertController, animated: true, completion: nil)
+                    
+                    let delay = 2.0 * Double(NSEC_PER_SEC)
+                    let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+                    dispatch_after(time, dispatch_get_main_queue(), {
+                        alertController.dismissViewControllerAnimated(true, completion: nil)
+                        self.timer.invalidate()
+                    })
                     
                 }
             }
