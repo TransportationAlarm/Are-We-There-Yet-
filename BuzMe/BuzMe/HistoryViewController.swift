@@ -11,6 +11,7 @@ import UIKit
 class HistoryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var clearHistoryButton: UIButton!
     
     var passedDistance: String!
     var passedDestination: String!
@@ -33,6 +34,8 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         historyInformation()
         tableView.estimatedRowHeight = 600
         tableView.rowHeight = UITableViewAutomaticDimension
+        
+        clearHistoryButton.layer.cornerRadius = 10
 
         // Do any additional setup after loading the view.
     }
@@ -56,6 +59,16 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         } else {
             return 0
         }
+    }
+    @IBAction func clearHistoryButtonPressed(sender: AnyObject) {
+        
+        passedOriginArray?.removeAll()
+        passedDistanceArray?.removeAll()
+        passedDestinationArray?.removeAll()
+        
+        tableView.reloadData()
+        
+        
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

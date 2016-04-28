@@ -125,7 +125,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="164" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Kin-ws-oIe">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="453"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="HistoryTableViewCell" rowHeight="164" id="j8N-ff-gRV" customClass="HistoryTableViewCell" customModule="BuzMe" customModuleProvider="target">
@@ -199,11 +199,31 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="taO-ul-agC">
+                                <rect key="frame" x="20" y="519" width="280" height="49"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="280" id="Gvf-Cu-yzP"/>
+                                    <constraint firstAttribute="height" constant="49" id="gB1-u1-ouY"/>
+                                </constraints>
+                                <state key="normal" title="Clear History">
+                                    <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="clearHistoryButtonPressed:" destination="17z-uJ-M7e" eventType="touchUpInside" id="BXG-H7-zuM"/>
+                                </connections>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="taO-ul-agC" firstAttribute="leading" secondItem="QHq-QJ-yxd" secondAttribute="leading" constant="20" id="MlI-ws-KFX"/>
+                            <constraint firstItem="Bap-fM-8jb" firstAttribute="top" secondItem="taO-ul-agC" secondAttribute="bottom" id="XIU-vs-azU"/>
+                            <constraint firstAttribute="trailing" secondItem="taO-ul-agC" secondAttribute="trailing" constant="20" id="wXR-iu-dQw"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Abt-9S-nDO"/>
                     <connections>
+                        <outlet property="clearHistoryButton" destination="taO-ul-agC" id="ZgT-eT-j6E"/>
                         <outlet property="tableView" destination="Kin-ws-oIe" id="VCi-Zq-YFM"/>
                     </connections>
                 </viewController>
@@ -241,19 +261,6 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IUo-7q-FqM">
-                                <rect key="frame" x="20" y="438" width="280" height="45"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="IUo-7q-FqM" secondAttribute="height" multiplier="56:9" id="pBD-xz-jy5"/>
-                                </constraints>
-                                <state key="normal" title="Clear History">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="onClearHistoryPressed:" destination="CpG-ub-5Vh" eventType="touchUpInside" id="hVa-nG-89I"/>
-                                </connections>
-                            </button>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AlR-w2-rr5">
                                 <rect key="frame" x="251" y="127" width="51" height="31"/>
                                 <connections>
@@ -261,10 +268,10 @@
                                 </connections>
                             </switch>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ORZ-th-ale">
-                                <rect key="frame" x="20" y="503" width="280" height="45"/>
+                                <rect key="frame" x="20" y="494" width="280" height="54"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="ORZ-th-ale" secondAttribute="height" multiplier="56:9" id="31J-8b-3k4"/>
+                                    <constraint firstAttribute="width" secondItem="ORZ-th-ale" secondAttribute="height" multiplier="56:9" constant="-56" id="31J-8b-3k4"/>
                                 </constraints>
                                 <state key="normal" title="Log Out">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -274,7 +281,7 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="29" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dYt-Jq-NNy">
-                                <rect key="frame" x="20" y="192" width="280" height="184"/>
+                                <rect key="frame" x="20" y="215" width="280" height="184"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="dYt-Jq-NNy" secondAttribute="height" multiplier="35:24" constant="11.666666666666686" id="fzE-VV-rem"/>
@@ -308,19 +315,16 @@
                             <constraint firstItem="54k-Gd-9ld" firstAttribute="top" secondItem="YC1-lg-j9C" secondAttribute="bottom" constant="28" id="2hX-kC-oFq"/>
                             <constraint firstItem="YC1-lg-j9C" firstAttribute="leading" secondItem="mzN-Vs-86R" secondAttribute="leading" constant="20" id="3DN-e6-dcM"/>
                             <constraint firstItem="YC1-lg-j9C" firstAttribute="top" secondItem="4xU-fW-dKN" secondAttribute="bottom" constant="19" id="7sH-C6-pUb"/>
+                            <constraint firstItem="ORZ-th-ale" firstAttribute="top" secondItem="dYt-Jq-NNy" secondAttribute="bottom" constant="95" id="9CD-4T-kPA"/>
                             <constraint firstAttribute="trailing" secondItem="NhY-8k-8Ga" secondAttribute="trailing" constant="20" id="9iZ-gp-IA7"/>
                             <constraint firstItem="AlR-w2-rr5" firstAttribute="top" secondItem="NhY-8k-8Ga" secondAttribute="bottom" constant="18" id="FN5-gN-gBf"/>
                             <constraint firstItem="ORZ-th-ale" firstAttribute="leading" secondItem="mzN-Vs-86R" secondAttribute="leading" constant="20" id="IKe-JI-u6g"/>
                             <constraint firstItem="dYt-Jq-NNy" firstAttribute="leading" secondItem="mzN-Vs-86R" secondAttribute="leading" constant="20" id="UPG-eY-V6S"/>
-                            <constraint firstAttribute="trailing" secondItem="IUo-7q-FqM" secondAttribute="trailing" constant="20" id="c3w-Px-t7y"/>
                             <constraint firstItem="54k-Gd-9ld" firstAttribute="leading" secondItem="mzN-Vs-86R" secondAttribute="leading" constant="20" id="fka-c2-0gv"/>
-                            <constraint firstItem="IUo-7q-FqM" firstAttribute="top" secondItem="dYt-Jq-NNy" secondAttribute="bottom" constant="62" id="jD2-HL-zEi"/>
-                            <constraint firstItem="dYt-Jq-NNy" firstAttribute="top" secondItem="AlR-w2-rr5" secondAttribute="bottom" constant="34" id="jML-ev-1Le"/>
-                            <constraint firstItem="ORZ-th-ale" firstAttribute="top" secondItem="IUo-7q-FqM" secondAttribute="bottom" constant="20" id="ktZ-U3-9HF"/>
+                            <constraint firstItem="dYt-Jq-NNy" firstAttribute="top" secondItem="AlR-w2-rr5" secondAttribute="bottom" constant="57" id="jML-ev-1Le"/>
                             <constraint firstAttribute="trailing" secondItem="ORZ-th-ale" secondAttribute="trailing" constant="20" id="ktq-Qo-jN1"/>
                             <constraint firstAttribute="trailing" secondItem="AlR-w2-rr5" secondAttribute="trailing" constant="20" id="nM6-NR-B6E"/>
                             <constraint firstAttribute="trailing" secondItem="dYt-Jq-NNy" secondAttribute="trailing" constant="20" id="ohh-Ok-s0B"/>
-                            <constraint firstItem="IUo-7q-FqM" firstAttribute="leading" secondItem="mzN-Vs-86R" secondAttribute="leading" constant="20" id="tSA-4b-GuN"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="cU3-dQ-zF8"/>
