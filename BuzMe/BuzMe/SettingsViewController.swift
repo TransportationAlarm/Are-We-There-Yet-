@@ -15,7 +15,9 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var vibrateOnRingSwitch: UISwitch!
     @IBOutlet weak var vibrateOnSilentSwitch: UISwitch!
     
-    var lastSelectedRow: NSIndexPath!
+    var lastSelectedRow: Int!
+
+    let defaults = NSUserDefaults.standardUserDefaults()
     
     var vibOnRingOn: Bool!
     var vibOnSilentOn: Bool!
@@ -34,6 +36,9 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         
         self.tableView.dataSource = self
         self.tableView.delegate = self
+        
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -51,24 +56,26 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         cell.textLabel?.text = soundName[indexPath.row]
         
         
-        /*if checkMarkToDisplay == indexPath.row {
+
+
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        lastSelectedRow = defaults.integerForKey("lastSelectedRow")
+        
+        if (indexPath.row == lastSelectedRow) {
             cell.accessoryType = .Checkmark
-        }
-        else{
+        } else {
             cell.accessoryType = .None
         }
-        */
-    
-        return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        if let cell = tableView.cellForRowAtIndexPath(indexPath) {
-            
-        tableView.cellForRowAtIndexPath(indexPath)?.accessoryType = .Checkmark
-
-        }
+        self.defaults.setInteger(indexPath.row, forKey: "lastSelectedRow")
+        self.defaults.synchronize()
         
         if (indexPath.row == 0) {
             let soundName = Array(soundsMap!.keys)[0]
@@ -91,6 +98,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             let soundId = soundsMap![soundName]
             AudioServicesPlayAlertSound(soundId!)
         }
+        
+        tableView.reloadData()
     
     }
     
@@ -101,9 +110,9 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
     
         return "Alarm:"
-    
-    
     }
+    
+    
 
     @IBAction func onVibrateRing(sender: AnyObject) {
         if (vibrateOnRingSwitch.on) {

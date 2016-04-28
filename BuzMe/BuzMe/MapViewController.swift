@@ -340,7 +340,7 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
 
                     print("counting..")
                     
-                    var alertController = UIAlertController(title: "Wake up!", message: "You have almost reached your destination", preferredStyle: UIAlertControllerStyle.Alert)
+                    let alertController = UIAlertController(title: "Wake up!", message: "You have almost reached your destination", preferredStyle: UIAlertControllerStyle.Alert)
                     
                     alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction!) in
                         self.timer.invalidate()

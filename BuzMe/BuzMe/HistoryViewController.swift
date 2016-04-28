@@ -31,8 +31,8 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         tableView.backgroundColor = UIColor.darkGrayColor()
         
         historyInformation()
-        //tableView.estimatedRowHeight = 600
-        //tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 600
+        tableView.rowHeight = UITableViewAutomaticDimension
 
         // Do any additional setup after loading the view.
     }
