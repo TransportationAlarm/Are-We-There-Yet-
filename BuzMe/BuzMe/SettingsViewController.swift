@@ -15,10 +15,13 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var vibrateOnRingSwitch: UISwitch!
     @IBOutlet weak var vibrateOnSilentSwitch: UISwitch!
     
-    var lastSelectedRow: NSIndexPath!
+    var lastSelectedRow: Int!
+
+    let defaults = NSUserDefaults.standardUserDefaults()
+
+    let vibrateRingState = "vibrateRingState"
+    let vibrateSilentState = "vibrateSilentState"
     
-    var vibOnRingOn: Bool!
-    var vibOnSilentOn: Bool!
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -34,6 +37,18 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         
         self.tableView.dataSource = self
         self.tableView.delegate = self
+        
+        let defaults = NSUserDefaults.standardUserDefaults()
+        
+        if (defaults.objectForKey(vibrateRingState) != nil) {
+            vibrateOnRingSwitch.on = defaults.boolForKey(vibrateRingState)
+        }
+        
+        if (defaults.objectForKey(vibrateSilentState) != nil) {
+            vibrateOnSilentSwitch.on = defaults.boolForKey(vibrateSilentState)
+        }
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -50,25 +65,27 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         let soundName = Array(soundsMap!.keys)
         cell.textLabel?.text = soundName[indexPath.row]
         
-        let checkMarkToDisplay  =   NSUserDefaults.standardUserDefaults().valueForKey("lastSelectedRow") as! Int
         
-        if checkMarkToDisplay == indexPath.row {
+
+
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        lastSelectedRow = defaults.integerForKey("lastSelectedRow")
+        
+        if (indexPath.row == lastSelectedRow) {
             cell.accessoryType = .Checkmark
-        }
-        else{
+        } else {
             cell.accessoryType = .None
         }
-    
-        return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        if let cell = tableView.cellForRowAtIndexPath(indexPath) {
-            
-        tableView.cellForRowAtIndexPath(indexPath)?.accessoryType = .Checkmark
-
-        }
+        self.defaults.setInteger(indexPath.row, forKey: "lastSelectedRow")
+        self.defaults.synchronize()
         
         if (indexPath.row == 0) {
             let soundName = Array(soundsMap!.keys)[0]
@@ -91,6 +108,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             let soundId = soundsMap![soundName]
             AudioServicesPlayAlertSound(soundId!)
         }
+        
+        tableView.reloadData()
     
     }
     
@@ -101,40 +120,51 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
     
         return "Alarm:"
-    
-    
     }
+    
+    
 
     @IBAction func onVibrateRing(sender: AnyObject) {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        
         if (vibrateOnRingSwitch.on) {
             AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
-            vibOnRingOn = true
+            defaults.setBool(true, forKey: vibrateRingState)
         } else {
-            vibOnRingOn = false
+            defaults.setBool(false, forKey: vibrateRingState)
         }
+        defaults.synchronize()
+        
     }
 
     @IBAction func onVibrateSilent(sender: AnyObject) {
+        
+        let defaults = NSUserDefaults.standardUserDefaults()
+        
         if (vibrateOnSilentSwitch.on) {
             AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
-            vibOnSilentOn = true
+            defaults.setBool(true, forKey: vibrateSilentState)
+            
         } else {
-            vibOnSilentOn = false
+            defaults.setBool(false, forKey: vibrateSilentState)
         }
+        defaults.synchronize()
     }
-    
-    @IBAction func onClearHistoryPressed(sender: AnyObject) {
-        
-        // history page needs to be set up first
-    }
-    /*
-    // MARK: - Navigation
 
+    // MARK: - Navigation
+    /*
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
+        
+            // Pass the selected object to the new view controller.
+            
+
+        
+        }
         // Pass the selected object to the new view controller.
     }
     */
+    
 
 }

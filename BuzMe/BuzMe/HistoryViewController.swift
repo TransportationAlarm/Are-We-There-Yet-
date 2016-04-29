@@ -11,6 +11,7 @@ import UIKit
 class HistoryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var clearHistoryButton: UIButton!
     
     var passedDistance: String!
     var passedDestination: String!
@@ -28,9 +29,13 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         tableView.delegate = self
         tableView.dataSource = self
         
+        tableView.backgroundColor = UIColor.darkGrayColor()
+        
         historyInformation()
-        //tableView.estimatedRowHeight = 600
-        //tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 600
+        tableView.rowHeight = UITableViewAutomaticDimension
+        
+        clearHistoryButton.layer.cornerRadius = 10
 
         // Do any additional setup after loading the view.
     }
@@ -46,10 +51,6 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         print(passedDestinationArray)
         print(passedOriginArray)
         
-        print(passedDistance)
-        print(passedDestination)
-        
-        
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -59,6 +60,16 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
             return 0
         }
     }
+    @IBAction func clearHistoryButtonPressed(sender: AnyObject) {
+        
+        passedOriginArray?.removeAll()
+        passedDistanceArray?.removeAll()
+        passedDestinationArray?.removeAll()
+        
+        tableView.reloadData()
+        
+        
+    }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
@@ -67,6 +78,8 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         cell.startLabel.text = self.passedOriginArray![indexPath.item]
         cell.destinationLabel.text = self.passedDestinationArray![indexPath.item]
         cell.distanceLabel.text = self.passedDistanceArray![indexPath.item]
+        
+        cell.backgroundColor = UIColor.darkGrayColor()
         
         return cell
     }

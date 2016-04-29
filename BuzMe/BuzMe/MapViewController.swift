@@ -18,11 +18,12 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
     @IBOutlet weak var googleMapsContainer: UIView!
     @IBOutlet weak var directionsView: UIView!
     @IBOutlet weak var instructionLabel: UILabel!
-    
-
+    let soundsMap: [String: SystemSoundID]? = ["Choo Choo": 1023, "Descent": 1024, "Minuet": 1027, "News Flash": 1028, "Sherwood Forest": 1030]
     
     let locationManager = CLLocationManager()
     var timer = NSTimer()
+    var vibratingTimer = NSTimer()
+    var soundTimer = NSTimer()
     
     var marker: GMSMarker!
     
@@ -30,6 +31,7 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
     var retrievedDestinationAddress: String!
     var retrievedOriginAddress: String!
     var alarmPressed: Bool!
+    var retrievedAlarmIndex: Int!
     
     var distanceArray = [String]()
     var destinationArray = [String]()
@@ -79,24 +81,7 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
         googleMapsView.settings.myLocationButton = true
         
         googleMapsView.delegate = self
-        
-        
-        //getCurrentLocation()
-        
-        // draw route
-        // let strHome = SRKUtility.addURLEncoding("Banana Republic, Grant Avenue, San Francisco, CA")
-        // let strOffice = SRKUtility.addURLEncoding("Union Square, San Francisco, CA")
 
-//        SRKUtility.invokeRequestForJSON(NSMutableURLRequest(URL: NSURL(string: str)!)) { (obj:AnyObject?, error:NSString?) -> Void in
-//            if let r = error {
-//                print("Error occured \(r)")
-//            } else if let objD = obj as? NSDictionary {
-//                print("Response in dictionary form \(objD)")
-//                self.parseAndDisplayDirection(objD)
-//            } else if let objA = obj as? NSArray {
-//                print("Response in array form \(objA)")
-//            }
-//        }
     }
     
     // MARK: GMSMapViewDelegate
@@ -165,7 +150,7 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
         destinationLat = coordinate.latitude
         destinationLong = coordinate.longitude
         
-        getDistanceData()
+        //getDistanceData()
         
     }
     
@@ -214,7 +199,7 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
     }
     
     @IBAction func onSetAlarm(sender: AnyObject) {
-        let alertController = UIAlertController(title: "Alarm Has Been Set!", message: "We will alert you half a mile from your location", preferredStyle: UIAlertControllerStyle.Alert)
+        let alertController = UIAlertController(title: "Alarm Has Been Set!", message: "We will alert you 0.5 miles from your location", preferredStyle: UIAlertControllerStyle.Alert)
 
         self.presentViewController(alertController, animated: true, completion: nil)
         
@@ -225,39 +210,40 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
         })
         
         timer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: #selector(MapViewController.checkDistanceForTimer), userInfo: nil, repeats: true)
-        
+        g
+        getDistanceData()
     }
     
-    func getCurrentLocation() {
-        placesClient?.currentPlaceWithCallback({
-            (placeLikelihoodList: GMSPlaceLikelihoodList?, error: NSError?) -> Void in
-            if let error = error {
-                print("Pick Place error: \(error.localizedDescription)")
-                return
-            }
-            
-            if let placeLikelihoodList = placeLikelihoodList {
-                let place = placeLikelihoodList.likelihoods.first?.place
-                if let place = place {
-
-                    let lat = place.coordinate.latitude
-                    let long = place.coordinate.longitude
-                    
-                    let camera = GMSCameraPosition.cameraWithLatitude(lat,
-                        longitude: long, zoom: 16)
-                    let mapView = GMSMapView.mapWithFrame(CGRectZero, camera: camera)
-                    
-                    self.view = mapView
-
-                    mapView.myLocationEnabled = true
-                    
-                    mapView.settings.myLocationButton = true
-                    mapView.settings.scrollGestures = true
-                    mapView.settings.zoomGestures = true
-                }
-            }
-        })
-    }
+//    func getCurrentLocation() {
+//        placesClient?.currentPlaceWithCallback({
+//            (placeLikelihoodList: GMSPlaceLikelihoodList?, error: NSError?) -> Void in
+//            if let error = error {
+//                print("Pick Place error: \(error.localizedDescription)")
+//                return
+//            }
+//            
+//            if let placeLikelihoodList = placeLikelihoodList {
+//                let place = placeLikelihoodList.likelihoods.first?.place
+//                if let place = place {
+//
+//                    let lat = place.coordinate.latitude
+//                    let long = place.coordinate.longitude
+//                    
+//                    let camera = GMSCameraPosition.cameraWithLatitude(lat,
+//                        longitude: long, zoom: 16)
+//                    let mapView = GMSMapView.mapWithFrame(CGRectZero, camera: camera)
+//                    
+//                    self.view = mapView
+//
+//                    mapView.myLocationEnabled = true
+//                    
+//                    mapView.settings.myLocationButton = true
+//                    mapView.settings.scrollGestures = true
+//                    mapView.settings.zoomGestures = true
+//                }
+//            }
+//        })
+//    }
     
 
 
@@ -282,27 +268,25 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
             if let distanceStr:JSON = json["rows"][0]["elements"][0]["distance"]["text"] {
                self.retrievedDistance = "\(distanceStr)"
                 print(retrievedDistance)
-                distanceArray.append(self.retrievedDistance)
+                distanceArray.insert(self.retrievedDistance, atIndex: 0)
                 print(distanceStr)
             }
             
             if let distanceM:JSON = json["rows"][0]["elements"][0]["distance"]["value"] {
                 print(distanceM)
                 if (distanceM < 800) { // if distance is less than 0.5 miles
-                    // vibrate phone
-                    AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
                 }
             }
             
             if let destinationAddress:JSON = json["destination_addresses"][0] {
                 self.retrievedDestinationAddress = "\(destinationAddress)"
-                destinationArray.append(retrievedDestinationAddress)
+                destinationArray.insert(self.retrievedDestinationAddress, atIndex: 0)
                 print(destinationAddress)
             }
             
             if let originAddress:JSON = json["origin_addresses"][0] {
                 self.retrievedOriginAddress = "\(originAddress)"
-                originArray.append(retrievedOriginAddress)
+                originArray.insert(self.retrievedOriginAddress, atIndex: 0)
                 print(originAddress)
             }
             
@@ -332,24 +316,70 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
                 print(distanceM)
                 if (distanceM < 800) { // if distance is less than 0.5 miles
                     // vibrate phone
-                    AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
+                    
+                    soundTimer = NSTimer.scheduledTimerWithTimeInterval(4, target: self, selector: #selector(MapViewController.ringAtDestination), userInfo: nil, repeats: true)
+
+
+                    vibratingTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(MapViewController.vibrateAtDestination), userInfo: nil, repeats: true)
+                    
 
                     print("counting..")
                     
-                    var alertController = UIAlertController(title: "Wake up!", message: "You have almost reached your destination", preferredStyle: UIAlertControllerStyle.Alert)
+                    let alertController = UIAlertController(title: "Wake up!", message: "You have almost reached your destination", preferredStyle: UIAlertControllerStyle.Alert)
                     
                     alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction!) in
+                        self.soundTimer.invalidate()
                         self.timer.invalidate()
+                        self.vibratingTimer.invalidate()
+                        print("entered alert")
+                        
                     }))
                     
                     presentViewController(alertController, animated: true, completion: nil)
+
+                    
                     
                 }
             }
         }
+    }
     
+    func vibrateAtDestination() {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        let shouldVibrateOnRing = defaults.boolForKey("vibrateRingState")
+        let shouldVibrateOnSilet = defaults.boolForKey("vibrateSilentState")
+        
+        if (shouldVibrateOnRing || shouldVibrateOnSilet) {
+            AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
+        }
+    }
     
-    
+    func ringAtDestination() {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        let alarmToPlay = defaults.integerForKey("lastSelectedRow")
+        defaults.synchronize()
+        
+        if (alarmToPlay == 0) {
+            let soundName = Array(soundsMap!.keys)[0]
+            let soundId = soundsMap![soundName]
+            AudioServicesPlayAlertSound(soundId!)
+        } else if (alarmToPlay == 1) {
+            let soundName = Array(soundsMap!.keys)[1]
+            let soundId = soundsMap![soundName]
+            AudioServicesPlayAlertSound(soundId!)
+        } else if (alarmToPlay == 2) {
+            let soundName = Array(soundsMap!.keys)[2]
+            let soundId = soundsMap![soundName]
+            AudioServicesPlayAlertSound(soundId!)
+        } else if (alarmToPlay == 3) {
+            let soundName = Array(soundsMap!.keys)[3]
+            let soundId = soundsMap![soundName]
+            AudioServicesPlayAlertSound(soundId!)
+        } else {
+            let soundName = Array(soundsMap!.keys)[4]
+            let soundId = soundsMap![soundName]
+            AudioServicesPlayAlertSound(soundId!)
+        }
     }
     
 
@@ -361,9 +391,6 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
         if (segue.identifier == "HistoryPage") {
             let destinationVC:HistoryViewController = segue.destinationViewController as! HistoryViewController
             // Pass the selected object to the new view controller.
-            destinationVC.passedOrigin = "Start: \(self.retrievedOriginAddress)"
-            destinationVC.passedDestination = "Destination: \(self.retrievedDestinationAddress)"
-            destinationVC.passedDistance = "Distance: \(self.retrievedDistance)"
             destinationVC.passedDestinationArray = destinationArray
             destinationVC.passedOriginArray = originArray
             destinationVC.passedDistanceArray = distanceArray
