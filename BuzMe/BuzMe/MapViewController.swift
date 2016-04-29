@@ -350,7 +350,7 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
         let shouldVibrateOnRing = defaults.boolForKey("vibrateRingState")
         let shouldVibrateOnSilet = defaults.boolForKey("vibrateSilentState")
         
-        if (shouldVibrateOnRing || shouldVibrateOnSilet) {
+        if (shouldVibrateOnRing == true || shouldVibrateOnSilet == true) {
             AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
         }
     }
