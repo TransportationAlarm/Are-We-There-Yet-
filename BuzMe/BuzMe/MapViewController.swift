@@ -21,7 +21,7 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
     let soundsMap: [String: SystemSoundID]? = ["Choo Choo": 1023, "Descent": 1024, "Minuet": 1027, "News Flash": 1028, "Sherwood Forest": 1030]
     
     let locationManager = CLLocationManager()
-    var alertController = UIAlertController()
+    var alertController : UIAlertController!
     var timer = NSTimer()
     var vibratingTimer = NSTimer()
     var soundTimer = NSTimer()
@@ -66,22 +66,33 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
 
         placesClient = GMSPlacesClient()
         
+        self.googleMapsView = GMSMapView(frame: self.googleMapsContainer.frame)
+        self.view.addSubview(self.googleMapsView)
+        
+        googleMapsView.myLocationEnabled = true
+        googleMapsView.settings.myLocationButton = true
+        
+        searchResultController = SearchResultsController()
+        searchResultController.delegate = self
+        
+        googleMapsView.delegate = self
+        
 
     }
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
         
-        self.googleMapsView = GMSMapView(frame: self.googleMapsContainer.frame)
-        self.view.addSubview(self.googleMapsView)
-        
+//        self.googleMapsView = GMSMapView(frame: self.googleMapsContainer.frame)
+//        //self.view.addSubview(self.googleMapsView)
+//        
         searchResultController = SearchResultsController()
         searchResultController.delegate = self
-        
-        googleMapsView.myLocationEnabled = true
-        googleMapsView.settings.myLocationButton = true
-        
-        googleMapsView.delegate = self
+//
+//        googleMapsView.myLocationEnabled = true
+//        googleMapsView.settings.myLocationButton = true
+//        
+//        googleMapsView.delegate = self
 
     }
     
