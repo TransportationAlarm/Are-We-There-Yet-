@@ -21,7 +21,7 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
     let soundsMap: [String: SystemSoundID]? = ["Choo Choo": 1023, "Descent": 1024, "Minuet": 1027, "News Flash": 1028, "Sherwood Forest": 1030]
     
     let locationManager = CLLocationManager()
-    var alertController = UIAlertController()
+    var alertController: UIAlertController!
     var timer = NSTimer()
     var vibratingTimer = NSTimer()
     var soundTimer = NSTimer()
@@ -313,6 +313,7 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
             
             print(json)
             
+            
             if let distanceM:JSON = json["rows"][0]["elements"][0]["distance"]["value"] {
                 print(distanceM)
                 if (distanceM < 800) { // if distance is less than 0.5 miles
@@ -323,6 +324,8 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
 
                     vibratingTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(MapViewController.vibrateAtDestination), userInfo: nil, repeats: true)
                     
+                    self.timer.invalidate()
+
 
                     print("counting..")
                     
@@ -330,7 +333,6 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
                     
                     alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction!) in
                         self.soundTimer.invalidate()
-                        self.timer.invalidate()
                         self.vibratingTimer.invalidate()
                         print("entered alert")
                         
