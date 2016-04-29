@@ -330,12 +330,14 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
                 if (distanceM < 800) { // if distance is less than 0.5 miles
                     // turn on alarm and vibrate phone
                     
+                    self.timer.invalidate()
+                    
                     soundTimer = NSTimer.scheduledTimerWithTimeInterval(4, target: self, selector: #selector(MapViewController.ringAtDestination), userInfo: nil, repeats: true)
 
 
                     vibratingTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(MapViewController.vibrateAtDestination), userInfo: nil, repeats: true)
                     
-                    self.timer.invalidate()
+                    
 
 
                     print("counting..")
