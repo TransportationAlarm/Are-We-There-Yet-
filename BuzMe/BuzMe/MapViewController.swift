@@ -224,7 +224,7 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
             alertController.dismissViewControllerAnimated(true, completion: nil)
         })
         
-        timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(MapViewController.checkDistanceForTimer), userInfo: nil, repeats: true)
+        timer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: #selector(MapViewController.checkDistanceForTimer), userInfo: nil, repeats: true)
         
     }
     
