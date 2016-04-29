@@ -408,7 +408,7 @@
                     <navigationItem key="navigationItem" title="BuzMe" id="RWa-8d-vVA">
                         <barButtonItem key="leftBarButtonItem" title="Settings" id="4uJ-pg-AdO">
                             <connections>
-                                <segue destination="CpG-ub-5Vh" kind="push" id="jDq-Ld-adH"/>
+                                <segue destination="CpG-ub-5Vh" kind="push" identifier="MapToSettings" id="jDq-Ld-adH"/>
                             </connections>
                         </barButtonItem>
                         <rightBarButtonItems>

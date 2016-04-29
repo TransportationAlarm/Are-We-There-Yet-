@@ -18,9 +18,10 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     var lastSelectedRow: Int!
 
     let defaults = NSUserDefaults.standardUserDefaults()
+
+    let vibrateRingState = "vibrateRingState"
+    let vibrateSilentState = "vibrateSilentState"
     
-    var vibOnRingOn: Bool!
-    var vibOnSilentOn: Bool!
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -37,6 +38,15 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         self.tableView.dataSource = self
         self.tableView.delegate = self
         
+        let defaults = NSUserDefaults.standardUserDefaults()
+        
+        if (defaults.objectForKey(vibrateRingState) != nil) {
+            vibrateOnRingSwitch.on = defaults.boolForKey(vibrateRingState)
+        }
+        
+        if (defaults.objectForKey(vibrateSilentState) != nil) {
+            vibrateOnSilentSwitch.on = defaults.boolForKey(vibrateSilentState)
+        }
         
         
     }
@@ -115,35 +125,46 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     
 
     @IBAction func onVibrateRing(sender: AnyObject) {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        
         if (vibrateOnRingSwitch.on) {
             AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
-            vibOnRingOn = true
+            defaults.setBool(true, forKey: vibrateRingState)
         } else {
-            vibOnRingOn = false
+            defaults.setBool(false, forKey: vibrateRingState)
         }
+        defaults.synchronize()
+        
     }
 
     @IBAction func onVibrateSilent(sender: AnyObject) {
+        
+        let defaults = NSUserDefaults.standardUserDefaults()
+        
         if (vibrateOnSilentSwitch.on) {
             AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
-            vibOnSilentOn = true
+            defaults.setBool(true, forKey: vibrateSilentState)
+            
         } else {
-            vibOnSilentOn = false
+            defaults.setBool(false, forKey: vibrateSilentState)
         }
+        defaults.synchronize()
     }
-    
-    @IBAction func onClearHistoryPressed(sender: AnyObject) {
-        
-        // history page needs to be set up first
-    }
-    
-    // MARK: - Navigation
 
+    // MARK: - Navigation
+    /*
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
+        
+            // Pass the selected object to the new view controller.
+            
+
+        
+        }
         // Pass the selected object to the new view controller.
     }
+    */
     
 
 }
