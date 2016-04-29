@@ -21,6 +21,7 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
     let soundsMap: [String: SystemSoundID]? = ["Choo Choo": 1023, "Descent": 1024, "Minuet": 1027, "News Flash": 1028, "Sherwood Forest": 1030]
     
     let locationManager = CLLocationManager()
+    var alertController = UIAlertController()
     var timer = NSTimer()
     var vibratingTimer = NSTimer()
     var soundTimer = NSTimer()
@@ -199,18 +200,18 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
     }
     
     @IBAction func onSetAlarm(sender: AnyObject) {
-        let alertController = UIAlertController(title: "Alarm Has Been Set!", message: "We will alert you 0.5 miles from your location", preferredStyle: UIAlertControllerStyle.Alert)
+        alertController = UIAlertController(title: "Alarm Has Been Set!", message: "We will alert you 0.5 miles from your location", preferredStyle: UIAlertControllerStyle.Alert)
 
         self.presentViewController(alertController, animated: true, completion: nil)
         
         let delay = 2.0 * Double(NSEC_PER_SEC)
         let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
         dispatch_after(time, dispatch_get_main_queue(), {
-            alertController.dismissViewControllerAnimated(true, completion: nil)
+            self.alertController.dismissViewControllerAnimated(true, completion: nil)
         })
         
         timer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: #selector(MapViewController.checkDistanceForTimer), userInfo: nil, repeats: true)
-        g
+
         getDistanceData()
     }
     
@@ -315,7 +316,7 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
             if let distanceM:JSON = json["rows"][0]["elements"][0]["distance"]["value"] {
                 print(distanceM)
                 if (distanceM < 800) { // if distance is less than 0.5 miles
-                    // vibrate phone
+                    // turn on alarm and vibrate phone
                     
                     soundTimer = NSTimer.scheduledTimerWithTimeInterval(4, target: self, selector: #selector(MapViewController.ringAtDestination), userInfo: nil, repeats: true)
 
@@ -325,7 +326,7 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
 
                     print("counting..")
                     
-                    let alertController = UIAlertController(title: "Wake up!", message: "You have almost reached your destination", preferredStyle: UIAlertControllerStyle.Alert)
+                    alertController = UIAlertController(title: "Wake up!", message: "You have almost reached your destination", preferredStyle: UIAlertControllerStyle.Alert)
                     
                     alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction!) in
                         self.soundTimer.invalidate()
@@ -336,8 +337,6 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
                     }))
                     
                     presentViewController(alertController, animated: true, completion: nil)
-
-                    
                     
                 }
             }
