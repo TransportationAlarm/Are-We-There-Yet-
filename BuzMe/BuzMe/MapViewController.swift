@@ -66,33 +66,33 @@ class MapViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, 
 
         placesClient = GMSPlacesClient()
         
-        self.googleMapsView = GMSMapView(frame: self.googleMapsContainer.frame)
-        self.view.addSubview(self.googleMapsView)
-        
-        googleMapsView.myLocationEnabled = true
-        googleMapsView.settings.myLocationButton = true
-        
-        searchResultController = SearchResultsController()
-        searchResultController.delegate = self
-        
-        googleMapsView.delegate = self
-        
+//        self.googleMapsView = GMSMapView(frame: self.googleMapsContainer.frame)
+//        self.view.addSubview(self.googleMapsView)
+//        
+//        googleMapsView.myLocationEnabled = true
+//        googleMapsView.settings.myLocationButton = true
+//        
+//        searchResultController = SearchResultsController()
+//        searchResultController.delegate = self
+//        
+//        googleMapsView.delegate = self
+//        
 
     }
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
         
-//        self.googleMapsView = GMSMapView(frame: self.googleMapsContainer.frame)
-//        //self.view.addSubview(self.googleMapsView)
-//        
+        self.googleMapsView = GMSMapView(frame: self.googleMapsContainer.frame)
+        self.view.addSubview(self.googleMapsView)
+        
         searchResultController = SearchResultsController()
         searchResultController.delegate = self
-//
-//        googleMapsView.myLocationEnabled = true
-//        googleMapsView.settings.myLocationButton = true
-//        
-//        googleMapsView.delegate = self
+
+        googleMapsView.myLocationEnabled = true
+        googleMapsView.settings.myLocationButton = true
+        
+        googleMapsView.delegate = self
 
     }
     
